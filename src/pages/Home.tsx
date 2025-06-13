@@ -38,42 +38,42 @@ const Home = () => {
 
   const services = [
     {
-      icon: Globe,
+      icon: (props: React.SVGProps<SVGSVGElement>) => <Globe {...props} />,
       title: 'Sitios Web',
       description: 'Sitios web modernos y responsivos que destacan tu marca en línea',
       color: 'from-blue-500 to-cyan-500',
       link: '/services/websites'
     },
     {
-      icon: Store,
+      icon: (props: React.SVGProps<SVGSVGElement>) => <Store {...props} />,
       title: 'E-commerce',
       description: 'Tiendas online completas con pagos, inventario y envíos automatizados',
       color: 'from-green-500 to-emerald-500',
       link: '/services/ecommerce'
     },
     {
-      icon: Building2,
+      icon: (props: React.SVGProps<SVGSVGElement>) => <Building2 {...props} />,
       title: 'Sistemas Empresariales',
       description: 'Software personalizado para optimizar tus procesos de negocio',
       color: 'from-purple-500 to-indigo-500',
       link: '/services/enterprise-systems'
     },
     {
-      icon: Stethoscope,
+      icon: (props: React.SVGProps<SVGSVGElement>) => <Stethoscope {...props} />,
       title: 'Consultorios Médicos',
       description: 'Sistemas de citas, expedientes y gestión para profesionales de la salud',
       color: 'from-red-500 to-pink-500',
       link: '/services/orange-dr'
     },
     {
-      icon: Scale,
+      icon: (props: React.SVGProps<SVGSVGElement>) => <Scale {...props} />,
       title: 'Despachos Jurídicos',
       description: 'Plataformas para gestión de casos, clientes y documentos legales',
       color: 'from-amber-500 to-yellow-500',
       link: '/services/orange-lic'
     },
     {
-      icon: () => <img src="/images/tooth.svg" alt="Clínica Dental" className="w-8 h-8" />,
+      icon: (props: React.ImgHTMLAttributes<HTMLImageElement>) => <img src="/images/tooth.svg" alt="Clínica Dental" className="w-8 h-8" {...props} />,
       title: 'Clínicas Dentales',
       description: 'Software especializado para odontólogos y gestión de pacientes',
       color: 'from-orange-500 to-red-500',
@@ -442,7 +442,7 @@ const Home = () => {
                 >
                   <Card className="flex flex-col h-full p-8 bg-white/5 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:border-orange-500/30">
                     <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg transform transition-all duration-300 group-hover:scale-110`}>
-                      {typeof service.icon === 'function' ? service.icon() : <service.icon className="h-8 w-8 text-white" />}
+                      {service.icon({})}
                     </div>
                     <h3 className="text-2xl font-bold mb-4 text-white transition-colors duration-300 group-hover:text-orange-400">
                       {service.title}
