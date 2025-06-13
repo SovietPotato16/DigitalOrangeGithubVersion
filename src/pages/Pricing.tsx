@@ -1,11 +1,12 @@
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
+import { useState, useRef } from 'react';
 import { Check, Star, Zap, Crown, Rocket, Sparkles, Store, Coffee, Calendar, BarChart, Sparkle, Stethoscope, Scale, Brain, Building2, Users, Briefcase, HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import React from 'react';
 
 const formatPrice = (price: number): string => {
   return new Intl.NumberFormat('es-MX', {
@@ -20,6 +21,63 @@ const calculateAnnualPrice = (monthlyPrice: number): number => {
   // 20% discount for annual plans
   return Math.round(monthlyPrice * 0.8);
 };
+
+// Blob background component
+function AnimatedBlobsBackground() {
+  const ref = useRef<HTMLDivElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const [bounds, setBounds] = useState({ width: 1200, height: 800 });
+
+  // Actualiza el tamaño del contenedor dinámicamente
+  React.useEffect(() => {
+    function updateBounds() {
+      if (ref.current) {
+        const rect = ref.current.getBoundingClientRect();
+        setBounds({ width: rect.width, height: rect.height });
+      }
+    }
+    updateBounds();
+    window.addEventListener('resize', updateBounds);
+    return () => window.removeEventListener('resize', updateBounds);
+  }, []);
+
+  // Suaviza el movimiento con useSpring
+  const springX = useSpring(mouseX, { stiffness: 80, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 80, damping: 20 });
+
+  function handleMouseMove(e: React.MouseEvent) {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
+  }
+
+  // Los blobs se mueven en función de la posición del mouse y el tamaño real del contenedor
+  const blob1X = useTransform(springX, [0, bounds.width], [-120, 120]);
+  const blob1Y = useTransform(springY, [0, bounds.height], [-90, 90]);
+  const blob2X = useTransform(springX, [0, bounds.width], [120, -120]);
+  const blob2Y = useTransform(springY, [0, bounds.height], [90, -90]);
+  const blob3X = useTransform(springX, [0, bounds.width], [-80, 80]);
+  const blob3Y = useTransform(springY, [0, bounds.height], [100, -100]);
+  const blob4X = useTransform(springX, [0, bounds.width], [80, -80]);
+  const blob4Y = useTransform(springY, [0, bounds.height], [-100, 100]);
+
+  return (
+    <div
+      ref={ref}
+      className="pointer-events-auto absolute inset-0 w-full h-full overflow-hidden z-0"
+      onMouseMove={handleMouseMove}
+      aria-hidden
+    >
+      <motion.div style={{ x: blob1X, y: blob1Y }} className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-orange-500/40 rounded-full blur-xl opacity-80" />
+      <motion.div style={{ x: blob2X, y: blob2Y }} className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-orange-400/30 rounded-full blur-lg opacity-70" />
+      <motion.div style={{ x: blob3X, y: blob3Y }} className="absolute top-1/3 right-1/3 w-[300px] h-[300px] bg-orange-300/30 rounded-full blur-lg opacity-60" />
+      <motion.div style={{ x: blob4X, y: blob4Y }} className="absolute bottom-1/3 left-1/3 w-[250px] h-[250px] bg-orange-600/20 rounded-full blur-md opacity-60" />
+      <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#181c23] via-[#181c23]/80 to-orange-500/5" />
+    </div>
+  );
+}
 
 const Pricing = () => {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -355,14 +413,14 @@ const Pricing = () => {
   const renderPricingCards = (plans: any[]) => (
     <div className={`grid grid-cols-1 md:grid-cols-${plans.length === 2 ? '2' : '3'} gap-8 mx-auto ${
       plans.length === 2 ? 'max-w-[800px]' : 'max-w-[1200px]'
-    }`}>
+    } px-4 sm:px-6 lg:px-8`}>
             {plans.map((plan, index) => (
               <motion.div
           key={plan.name}
                 initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
-          className={`relative p-8 rounded-2xl border backdrop-blur-sm ${
+          className={`relative flex flex-col h-full p-8 rounded-2xl border backdrop-blur-sm ${
             plan.popular
               ? 'bg-orange-500/10 border-orange-500/50 shadow-lg shadow-orange-500/10'
               : 'bg-white/5 border-white/10 hover:border-orange-500/30'
@@ -412,7 +470,7 @@ const Pricing = () => {
                   </ul>
 
           <button
-            className={`w-full py-3 px-6 rounded-xl font-medium transition-all ${
+            className={`w-full py-3 px-6 rounded-xl font-medium transition-all mt-auto ${
                       plan.popular
                 ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:shadow-lg hover:shadow-orange-500/25'
                 : 'bg-white/10 text-white hover:bg-white/20'
@@ -426,8 +484,9 @@ const Pricing = () => {
   );
 
   return (
-    <div className="pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="pt-24 pb-16 relative overflow-hidden">
+      <AnimatedBlobsBackground />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-white sm:text-4xl">
             Planes y Precios
@@ -452,7 +511,7 @@ const Pricing = () => {
 
         {/* Pricing Tabs */}
         <Tabs defaultValue="websites" className="w-full">
-          <TabsList className="grid grid-cols-2 md:grid-cols-6 gap-3 bg-transparent mb-12">
+          <TabsList className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 bg-transparent mb-12 sm:mb-16">
             <TabsTrigger 
               value="websites"
               className="bg-white/5 hover:bg-white/10 text-white data-[state=active]:bg-orange-500 rounded-full px-4 py-2.5"
@@ -491,40 +550,37 @@ const Pricing = () => {
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="websites" className="mt-8">
-            {renderPricingCards(websitePlans)}
-          </TabsContent>
-
-          <TabsContent value="ecommerce" className="mt-8">
-            {renderPricingCards(ecommercePlans)}
-          </TabsContent>
-
-          <TabsContent value="smallbusiness" className="mt-8">
-            {renderPricingCards(smallBusinessPlans)}
-          </TabsContent>
-
-          <TabsContent value="enterprise" className="mt-8">
-            {renderPricingCards(enterpriseSystems)}
-          </TabsContent>
-
-          <TabsContent value="professional" className="mt-8">
-            {renderPricingCards(professionalServices)}
-          </TabsContent>
-
-          <TabsContent value="specialized" className="mt-8">
-            <div className="text-center max-w-3xl mx-auto mb-16 p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-orange-500/30 transition-all hover:shadow-[0_8px_30px_rgb(255,107,53,0.1)]">
-              <h3 className="text-2xl font-bold text-white mb-4">¿Necesitas algo diferente?</h3>
-              <p className="text-gray-400 mb-8">
-                ¿No encuentras el producto que necesitas? Nuestro equipo de expertos puede crear una solución personalizada para tu negocio.
-              </p>
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:shadow-lg hover:shadow-orange-500/25 transition-all"
-              >
-                Contacta a nuestros expertos
-              </Link>
+          <div className="mt-16">
+            <TabsContent value="websites" className="mt-0">
+              {renderPricingCards(websitePlans)}
+            </TabsContent>
+            <TabsContent value="ecommerce" className="mt-0">
+              {renderPricingCards(ecommercePlans)}
+            </TabsContent>
+            <TabsContent value="smallbusiness" className="mt-0">
+              {renderPricingCards(smallBusinessPlans)}
+            </TabsContent>
+            <TabsContent value="enterprise" className="mt-0">
+              {renderPricingCards(enterpriseSystems)}
+            </TabsContent>
+            <TabsContent value="professional" className="mt-0">
+              {renderPricingCards(professionalServices)}
+            </TabsContent>
+            <TabsContent value="specialized" className="mt-0">
+              <div className="text-center max-w-3xl mx-auto mb-16 p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-orange-500/30 transition-all hover:shadow-[0_8px_30px_rgb(255,107,53,0.1)]">
+                <h3 className="text-2xl font-bold text-white mb-4">¿Necesitas algo diferente?</h3>
+                <p className="text-gray-400 mb-8">
+                  ¿No encuentras el producto que necesitas? Nuestro equipo de expertos puede crear una solución personalizada para tu negocio.
+                </p>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:shadow-lg hover:shadow-orange-500/25 transition-all"
+                >
+                  Contacta a nuestros expertos
+                </Link>
+            </div>
+            </TabsContent>
           </div>
-          </TabsContent>
         </Tabs>
 
         {/* Guide Button */}

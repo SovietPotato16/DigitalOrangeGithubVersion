@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Zap, Palette, Smartphone, ShoppingCart, Calendar, Megaphone, CheckCircle, Star, Sparkles, Code, Rocket, Eye, Heart, Stethoscope, Scale, HeartPulse, Building2, Globe, Store } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -40,37 +41,43 @@ const Home = () => {
       icon: Globe,
       title: 'Sitios Web',
       description: 'Sitios web modernos y responsivos que destacan tu marca en línea',
-      color: 'from-blue-500 to-cyan-500'
+      color: 'from-blue-500 to-cyan-500',
+      link: '/services/websites'
     },
     {
       icon: Store,
       title: 'E-commerce',
       description: 'Tiendas online completas con pagos, inventario y envíos automatizados',
-      color: 'from-green-500 to-emerald-500'
+      color: 'from-green-500 to-emerald-500',
+      link: '/services/ecommerce'
     },
     {
       icon: Building2,
       title: 'Sistemas Empresariales',
       description: 'Software personalizado para optimizar tus procesos de negocio',
-      color: 'from-purple-500 to-indigo-500'
+      color: 'from-purple-500 to-indigo-500',
+      link: '/services/enterprise-systems'
     },
     {
       icon: Stethoscope,
       title: 'Consultorios Médicos',
       description: 'Sistemas de citas, expedientes y gestión para profesionales de la salud',
-      color: 'from-red-500 to-pink-500'
+      color: 'from-red-500 to-pink-500',
+      link: '/services/orange-dr'
     },
     {
       icon: Scale,
       title: 'Despachos Jurídicos',
       description: 'Plataformas para gestión de casos, clientes y documentos legales',
-      color: 'from-amber-500 to-yellow-500'
+      color: 'from-amber-500 to-yellow-500',
+      link: '/services/orange-lic'
     },
     {
-      icon: HeartPulse,
+      icon: () => <img src="/images/tooth.svg" alt="Clínica Dental" className="w-8 h-8" />,
       title: 'Clínicas Dentales',
       description: 'Software especializado para odontólogos y gestión de pacientes',
-      color: 'from-orange-500 to-red-500'
+      color: 'from-orange-500 to-red-500',
+      link: '/services/orange-dr'
     }
   ];
 
@@ -248,10 +255,10 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
               <div className="flex flex-col items-center justify-center gap-8">
                 <motion.button
-                  onClick={handleLaunchProject}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-gradient-to-r from-orange-500 to-pink-500 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center gap-2"
+                  onClick={handleLaunchProject}
                 >
                   <Rocket className="w-6 h-6 mr-2 group-hover:rotate-12 transition-transform" />
                   Lanzar proyecto
@@ -266,9 +273,12 @@ const Home = () => {
                   size="lg" 
                   variant="outline" 
                   className="rounded-full px-10 py-6 text-xl bg-white text-gray-900 hover:text-orange-500 hover:bg-white backdrop-blur-sm group border-0"
+                  asChild
                 >
-                  <Eye className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform" />
-                  Ver la magia
+                  <Link to="/portfolio">
+                    <Eye className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform" />
+                    Ver la magia
+                  </Link>
                 </Button>
               </motion.div>
             </div>
@@ -340,12 +350,63 @@ const Home = () => {
 
       {/* Content Sections */}
       <div className="relative">
-        {/* Divider */}
-        <div className="absolute inset-x-0 -top-24 h-48 bg-gradient-to-b from-transparent via-white/5 to-transparent blur-xl pointer-events-none" />
-
         {/* Services Section */}
-        <section className="relative py-32">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative py-32 mt-32">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
+            <motion.div 
+              animate={{
+                x: [0, 50, 0],
+                y: [0, -25, 0],
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-orange-500/40 rounded-full blur-xl opacity-80"
+            />
+            <motion.div
+              animate={{
+                x: [0, -40, 0],
+                y: [0, 30, 0],
+              }}
+              transition={{
+                duration: 25,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-orange-400/30 rounded-full blur-lg opacity-70"
+            />
+            <motion.div
+              animate={{
+                x: [0, 25, 0],
+                y: [0, -15, 0],
+              }}
+              transition={{
+                duration: 30,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="absolute top-1/3 right-1/3 w-[300px] h-[300px] bg-orange-300/30 rounded-full blur-lg opacity-60"
+            />
+            <motion.div
+              animate={{
+                x: [0, -20, 0],
+                y: [0, 20, 0],
+              }}
+              transition={{
+                duration: 35,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="absolute bottom-1/3 left-1/3 w-[250px] h-[250px] bg-orange-600/20 rounded-full blur-md opacity-60"
+            />
+            <div className="absolute inset-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#181c23] via-[#181c23]/90 via-[#181c23]/80 via-[#181c23]/70 to-orange-500/5" />
+          </div>
+
+          {/* Content */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -379,9 +440,9 @@ const Home = () => {
                   whileHover={{ y: -8 }}
                   style={{ position: 'relative' }}
                 >
-                  <Card className="flex flex-col h-full p-8 bg-white/10 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:border-orange-500/30">
+                  <Card className="flex flex-col h-full p-8 bg-white/5 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:border-orange-500/30">
                     <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg transform transition-all duration-300 group-hover:scale-110`}>
-                      <service.icon className="h-8 w-8 text-white" />
+                      {typeof service.icon === 'function' ? service.icon() : <service.icon className="h-8 w-8 text-white" />}
                     </div>
                     <h3 className="text-2xl font-bold mb-4 text-white transition-colors duration-300 group-hover:text-orange-400">
                       {service.title}
@@ -391,10 +452,13 @@ const Home = () => {
                     </p>
                     <Button 
                       variant="ghost" 
-                      className="w-full mt-auto bg-white/5 hover:bg-white/10 text-white hover:text-white border border-white/20 hover:border-orange-500/30 rounded-xl group"
+                      className="w-full mt-auto bg-white/5 hover:bg-white/10 text-white hover:text-white border border-white/10 hover:border-orange-500/30 rounded-xl group"
+                      asChild
                     >
-                      <span>Más información</span>
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      <Link to={service.link}>
+                        <span>Más información</span>
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </Link>
                     </Button>
                   </Card>
                 </motion.div>
@@ -402,12 +466,6 @@ const Home = () => {
             </div>
           </div>
         </section>
-
-        {/* Divider */}
-        <div className="relative h-px w-full max-w-7xl mx-auto overflow-hidden my-4">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-500/20 to-transparent blur-sm" />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent blur-md" />
-        </div>
 
         {/* Company Logos Carousel */}
         <div className="relative py-12 overflow-hidden bg-gradient-to-r from-orange-50 via-pink-50 to-purple-50 backdrop-blur-[2px]">
@@ -450,77 +508,6 @@ const Home = () => {
               ))}
             </LogoTrack>
           </div>
-        </div>
-
-        {/* Divider */}
-        <div className="relative h-px w-full max-w-7xl mx-auto overflow-hidden my-4">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-pink-500/20 to-transparent blur-sm" />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent blur-md" />
-        </div>
-
-        {/* Testimonials Section */}
-        <section className="relative py-32">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-20"
-            >
-              <h2 className="text-5xl md:text-6xl font-black mb-8">
-                <span className="text-white">Testimonials</span>
-                <br />
-                <span className="text-gradient-rainbow">What our clients say</span>
-              </h2>
-              <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                Hear from our happy customers
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {testimonials.map((testimonial, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.2 }}
-                  className="text-center group"
-                >
-                  <motion.div 
-                    className="relative mb-8 mx-auto w-24 h-24"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                  >
-                    <div className="w-24 h-24 bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white font-black text-2xl shadow-2xl">
-                      {testimonial.name}
-                    </div>
-                    <motion.div
-                      className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center"
-                      whileHover={{ rotate: 180 }}
-                    >
-                      <img 
-                        src={testimonial.avatar} 
-                        alt={testimonial.name}
-                        className="w-8 h-8 rounded-full object-cover"
-                      />
-                    </motion.div>
-                  </motion.div>
-                  <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-orange-400 transition-colors">
-                    {testimonial.name}
-                  </h3>
-                  <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
-                    {testimonial.content}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Divider */}
-        <div className="relative h-px w-full max-w-7xl mx-auto overflow-hidden my-4">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-pink-500/20 to-transparent blur-sm" />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent blur-md" />
         </div>
 
         {/* Revolution Section */}
@@ -574,9 +561,6 @@ const Home = () => {
             </motion.div>
           </div>
         </section>
-
-        {/* Final Divider */}
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-transparent via-white/5 to-transparent blur-xl pointer-events-none" />
       </div>
 
       {/* Project Wizard */}
