@@ -21,19 +21,27 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ['lucide-react'],
+    include: ['lucide-react'],
+    esbuildOptions: {
+      target: 'es2020'
+    }
   },
   build: {
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'index.html'),
       },
+      output: {
+        manualChunks: {
+          'lucide-react': ['lucide-react']
+        }
+      }
     },
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: false,
     minify: 'terser',
-    target: 'es2018',
+    target: 'es2020',
   },
   server: {
     proxy: {
