@@ -3,11 +3,16 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar } from 'lucide-react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { useHugoPosts } from '@/hooks/useHugoPosts';
+import postsData from '@/data/posts.json';
+import { slugify } from '@/lib/utils';
+
+type Post = (typeof postsData.posts)[number];
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { posts, isLoading, error } = useHugoPosts();
+  const posts = postsData.posts as Post[];
+  const isLoading = false;
+  const error = null as Error | null;
   const post = posts.find(p => p.slug === slug);
 
   if (isLoading) {
@@ -75,7 +80,7 @@ const BlogPost = () => {
 
           {/* Author and date */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
+            <Link to={`/blog/author/${slugify(post.author.name)}`} className="flex items-center space-x-3 hover:text-orange-500 transition-colors">
               <img
                 src={post.author.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(post.author.name)}&background=FF6B00&color=fff&size=128`}
                 alt={post.author.name}
@@ -86,14 +91,14 @@ const BlogPost = () => {
                 }}
               />
               <div>
-                <span className="block text-sm font-medium text-white">
+                <span className="block text-sm font-medium">
                   {post.author.name}
                 </span>
                 <span className="text-xs text-gray-400">
                   {post.author.bio}
                 </span>
               </div>
-            </div>
+            </Link>
             <div className="flex items-center text-sm text-gray-400">
               <Calendar className="w-4 h-4 mr-1" />
               <time dateTime={post.date}>
@@ -111,12 +116,12 @@ const BlogPost = () => {
           className="mb-12"
         >
           <img
-            src={post.coverImage || '/images/blog/placeholder.jpg'}
+            src={post.coverImage || 'https://source.unsplash.com/featured/800x450?web'}
             alt={post.title}
             className="w-full aspect-[16/9] object-cover rounded-2xl"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
-              target.src = '/images/blog/placeholder.jpg';
+              target.src = 'https://source.unsplash.com/featured/800x450?web';
             }}
           />
         </motion.div>

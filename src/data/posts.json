@@ -1,19 +1,49 @@
 {
   "posts": [
     {
-      "title": "Ejemplo de Post",
-      "date": "2024-02-20",
-      "slug": "ejemplo-post",
-      "summary": "Este es un post de ejemplo mientras configuramos la integración con Hugo.",
-      "content": "<p>Contenido del post de ejemplo.</p>",
+      "title": "5 Estrategias de SEO para 2024",
+      "date": "2024-01-15",
+      "slug": "estrategias-seo-2024",
+      "summary": "Descubre cinco tácticas clave para posicionar tu sitio web en los primeros resultados de Google este año.",
+      "content": "<p>Contenido de ejemplo para estrategias de SEO.</p>",
       "author": {
-        "name": "Autor de Ejemplo",
-        "bio": "Bio del autor",
-        "avatar": "/images/authors/default.jpg"
+        "name": "María Gómez",
+        "avatar": "https://randomuser.me/api/portraits/women/44.jpg",
+        "bio": "Especialista en marketing digital y SEO."
       },
-      "categories": ["Ejemplo"],
-      "tags": ["demo"],
-      "coverImage": "/images/blog/placeholder.jpg"
+      "categories": ["SEO", "Marketing"],
+      "tags": ["seo", "estrategia", "google"],
+      "coverImage": "https://source.unsplash.com/featured/800x450?seo"
+    },
+    {
+      "title": "¿Qué es la Jamstack y por qué deberías considerarla?",
+      "date": "2024-02-05",
+      "slug": "que-es-jamstack",
+      "summary": "Una introducción sencilla al paradigma Jamstack y sus beneficios de rendimiento y seguridad.",
+      "content": "<p>Contenido de ejemplo sobre Jamstack.</p>",
+      "author": {
+        "name": "Juan Pérez",
+        "avatar": "https://randomuser.me/api/portraits/men/32.jpg",
+        "bio": "Desarrollador full-stack apasionado por la arquitectura JAMStack."
+      },
+      "categories": ["Desarrollo", "Jamstack"],
+      "tags": ["jamstack", "desarrollo web"],
+      "coverImage": "https://source.unsplash.com/featured/800x450?programming"
+    },
+    {
+      "title": "Cómo optimizar la experiencia de usuario en tu e-commerce",
+      "date": "2024-03-10",
+      "slug": "ux-ecommerce",
+      "summary": "Guía práctica para reducir el abandono de carrito mejorando la interfaz y el rendimiento.",
+      "content": "<p>Contenido de ejemplo sobre UX en e-commerce.</p>",
+      "author": {
+        "name": "Carlos Ramírez",
+        "avatar": "https://randomuser.me/api/portraits/men/75.jpg",
+        "bio": "Diseñador UI/UX enfocado en accesibilidad."
+      },
+      "categories": ["UX", "E-commerce"],
+      "tags": ["ux", "ecommerce", "conversion"],
+      "coverImage": "https://source.unsplash.com/featured/800x450?ecommerce"
     }
   ]
 } 

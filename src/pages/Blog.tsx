@@ -2,12 +2,21 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Search } from 'lucide-react';
 import BlogCard from '@/components/blog/BlogCard';
-import { useHugoPosts } from '@/hooks/useHugoPosts';
-import type { HugoPost } from '@/hooks/useHugoPosts';
+import postsData from '@/data/posts.json';
+
+// Definimos el tipo de Post basándonos en la estructura del JSON
+type Post = (typeof postsData.posts)[number];
+
+// Creamos un objeto que simula la respuesta del hook eliminado
+const hookResponse = {
+  posts: postsData.posts as Post[],
+  isLoading: false,
+  error: null as Error | null,
+};
 
 const Blog = () => {
-  const { posts, isLoading, error } = useHugoPosts();
-  const [filteredPosts, setFilteredPosts] = useState<HugoPost[]>([]);
+  const { posts, isLoading, error } = hookResponse;
+  const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [categories, setCategories] = useState<string[]>([]);

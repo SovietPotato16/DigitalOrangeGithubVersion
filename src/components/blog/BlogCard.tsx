@@ -39,12 +39,12 @@ const BlogCard = ({
       <Link to={`/blog/${slug}`} className="block">
         <div className="aspect-[16/9] relative overflow-hidden">
           <img
-            src={coverImage || '/images/blog/placeholder.jpg'}
+            src={coverImage || 'https://source.unsplash.com/featured/800x450?web'}
             alt={title}
             className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
-              target.src = '/images/blog/placeholder.jpg';
+              target.src = 'https://source.unsplash.com/featured/800x450?web';
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -72,7 +72,7 @@ const BlogCard = ({
 
         <div className="flex items-center justify-between pt-4 border-t border-white/10">
           <Link
-            to={`/author/${authorId}`}
+            to={`/blog/author/${authorId}`}
             className="flex items-center space-x-3 group"
           >
             <img

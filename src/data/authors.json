@@ -1,0 +1,34 @@
+{
+  "authors": [
+    {
+      "id": "juan-perez",
+      "name": "Juan Pérez",
+      "bio": "Desarrollador full-stack especializado en arquitecturas JAMStack y optimización de rendimiento.",
+      "avatar": "https://randomuser.me/api/portraits/men/32.jpg",
+      "social": {
+        "twitter": "https://twitter.com/examplejuan",
+        "linkedin": "https://www.linkedin.com/in/examplejuan/"
+      }
+    },
+    {
+      "id": "maria-gomez",
+      "name": "María Gómez",
+      "bio": "Especialista en marketing digital y SEO con más de 8 años de experiencia ayudando a marcas a crecer en línea.",
+      "avatar": "https://randomuser.me/api/portraits/women/44.jpg",
+      "social": {
+        "twitter": "https://twitter.com/examplemaria",
+        "linkedin": "https://www.linkedin.com/in/examplemaria/"
+      }
+    },
+    {
+      "id": "carlos-ramirez",
+      "name": "Carlos Ramírez",
+      "bio": "Diseñador UI/UX apasionado por crear experiencias digitales accesibles y centradas en el usuario.",
+      "avatar": "https://randomuser.me/api/portraits/men/75.jpg",
+      "social": {
+        "twitter": "https://twitter.com/examplecarlos",
+        "linkedin": "https://www.linkedin.com/in/examplecarlos/"
+      }
+    }
+  ]
+} 

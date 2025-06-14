@@ -17,11 +17,13 @@ import EnterpriseSystems from '@/pages/services/EnterpriseSystems';
 import OrangeDr from '@/pages/services/OrangeDr';
 import OrangeLic from '@/pages/services/OrangeLic';
 import AuthorPage from '@/pages/AuthorPage';
+import ScrollToTop from '@/components/ScrollToTop';
 import './App.css';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen bg-gray-900 text-white flex flex-col">
         <Navbar />
         <main className="flex-grow">
