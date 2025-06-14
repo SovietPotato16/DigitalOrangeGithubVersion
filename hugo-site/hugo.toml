@@ -1,4 +1,4 @@
-baseURL = 'http://localhost:1313'
+baseURL = 'https://your-production-url.com'  # Replace with your actual production URL
 languageCode = 'es'
 title = 'Orange Digital Blog'
 
@@ -8,8 +8,12 @@ title = 'Orange Digital Blog'
 
 [params]
   description = "Blog de Orange Digital sobre desarrollo web y tecnología"
+  env = "production"
 
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
+[build]
+  writeStats = true
