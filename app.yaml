@@ -1,4 +1,5 @@
 name: digital-orange-sites
+# Deployment configuration for React/Vite app
 services:
 - name: web
   github:
