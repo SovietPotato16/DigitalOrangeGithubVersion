@@ -7,15 +7,18 @@
     <meta name="description" content="Digital Orange Sites - Sitios web profesionales entregados en 48 horas. Especialistas en portafolios, e-commerce, menús digitales y más." />
     <meta name="keywords" content="diseño web, desarrollo web, sitios web rápidos, e-commerce, portafolios, menús digitales" />
     <title>Digital Orange Sites - Sitios web en 48 horas</title>
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H9JCDRGWDS"></script>
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/src/main.tsx" as="script" type="module" />
+    <!-- Defer non-critical JavaScript -->
+    <script defer async src="https://www.googletagmanager.com/gtag/js?id=G-H9JCDRGWDS"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-H9JCDRGWDS');
+      gtag('config', 'G-H9JCDRGWDS', {
+        'send_page_view': false
+      });
     </script>
-    <!-- End Google Analytics 4 -->
   </head>
   <body>
     <div id="root"></div>
