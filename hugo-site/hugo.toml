@@ -1,4 +1,4 @@
-baseURL = 'https://your-production-url.com'  # Replace with your actual production URL
+baseURL = '${APP_URL}'  # This will be replaced with the actual app URL
 languageCode = 'es'
 title = 'Orange Digital Blog'
 
