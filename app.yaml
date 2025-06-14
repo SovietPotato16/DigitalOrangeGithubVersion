@@ -4,11 +4,7 @@ services:
   github:
     branch: main
     deploy_on_push: true
-  build_command: |
-    curl -L https://github.com/gohugoio/hugo/releases/download/v0.123.6/hugo_extended_0.123.6_linux-amd64.deb -o hugo.deb
-    sudo dpkg -i hugo.deb
-    npm install
-    npm run build
+  build_command: npm install && npm run build
   run_command: npm run preview
   envs:
   - key: NODE_ENV
