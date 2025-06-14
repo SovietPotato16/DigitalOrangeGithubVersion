@@ -11,6 +11,6 @@ services:
   - key: NODE_ENV
     value: production
   - key: NODE_VERSION
-    value: 24.x
+    value: 20.x
   - key: NPM_VERSION
-    value: 11.x 
+    value: 10.x 
