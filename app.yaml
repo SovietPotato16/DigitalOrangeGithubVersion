@@ -9,4 +9,8 @@ services:
   run_command: npm run preview
   envs:
   - key: NODE_ENV
-    value: production 
+    value: production
+  - key: NODE_VERSION
+    value: 24.x
+  - key: NPM_VERSION
+    value: 11.x 
