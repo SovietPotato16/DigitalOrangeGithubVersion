@@ -5,7 +5,7 @@
       "date": "2024-01-15",
       "slug": "estrategias-seo-2024",
       "summary": "Descubre cinco tácticas clave para posicionar tu sitio web en los primeros resultados de Google este año.",
-      "content": "<p>Contenido de ejemplo para estrategias de SEO.</p>",
+      "content": "<h2>Introducción</h2><p>En 2024, el posicionamiento en buscadores sigue siendo una disciplina clave para atraer tráfico orgánico y generar ventas. A continuación comparto cinco tácticas probadas para mejorar tu visibilidad.</p><img src=\"https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=800&q=60\" alt=\"Gráfico SEO\" class=\"rounded-xl my-6\"/><h3>1. Optimización para búsqueda por voz</h3><p>Los asistentes como Siri y Google Assistant han cambiado la forma en que las personas formulan consultas. Trabaja <strong>palabras clave conversacionales</strong> y responde preguntas directas.</p><h3>2. EEAT (Experiencia, Expertez, Autoridad y Confianza)</h3><p>Añade biografías de autores, enlaza estudios y muestra pruebas de tu experiencia en la materia.</p><h3>3. Core Web Vitals</h3><p>Google prioriza sitios rápidos. Utiliza imágenes <em>next-gen</em> y carga diferida para mejorar tu <code>Largest Contentful Paint</code>.</p><h3>4. Rich snippets y datos estructurados</h3><p>Implementa <a href=\"https://schema.org\" target=\"_blank\" rel=\"noopener\">Schema.org</a> para recetas, cursos, eventos, etc.</p><h3>5. Contenido de formato largo</h3><p>Publicaciones superiores a 2.000 palabras con secciones bien definidas aumentan el <abbr title=\"Tiempo de permanencia\">dwell time</abbr>.</p><blockquote class=\"border-l-4 border-orange-500 pl-4 italic my-6\">El buen SEO no es magia, es constancia y análisis.</blockquote><p>¿Listo para implementar estas estrategias? Empieza auditando tu sitio con Google Search Console y prioriza los puntos de mayor impacto.</p>",
       "author": {
         "name": "María Gómez",
         "avatar": "https://randomuser.me/api/portraits/women/44.jpg",
@@ -20,7 +20,7 @@
       "date": "2024-02-05",
       "slug": "que-es-jamstack",
       "summary": "Una introducción sencilla al paradigma Jamstack y sus beneficios de rendimiento y seguridad.",
-      "content": "<p>Contenido de ejemplo sobre Jamstack.</p>",
+      "content": "<h2>Qué es Jamstack</h2><p>Jamstack es una arquitectura que combina <strong>JavaScript</strong>, <strong>APIs</strong> y <strong>Markup</strong>. Separa la capa de presentación del servidor para conseguir sitios más rápidos y seguros.</p><img src=\"https://images.unsplash.com/photo-1556485688-009a3ec6b43d?auto=format&fit=crop&w=800&q=60\" alt=\"Código Jamstack\" class=\"rounded-xl my-6\"/><h3>Ventajas principales</h3><ul><li><strong>Velocidad</strong>: El contenido se sirve desde una CDN.</li><li><strong>Seguridad</strong>: Menos superficie de ataque al eliminar servidores de aplicaciones.</li><li><strong>Escalabilidad</strong>: Pagas por lo que usas gracias a funciones serverless.</li></ul><h3>Cuándo elegir Jamstack</h3><p>Ideal para blogs, e-commerce y sitios corporativos que requieran gran rendimiento global.</p><pre><code class=\"language-bash\"># Ejemplo de despliegue con Netlify<br/>npm run build<br/>netlify deploy --prod</code></pre><p>Adoptar Jamstack puede mejorar tu puntuación en Lighthouse y Core Web Vitals al instante.</p>",
       "author": {
         "name": "Juan Pérez",
         "avatar": "https://randomuser.me/api/portraits/men/32.jpg",
@@ -35,7 +35,7 @@
       "date": "2024-03-10",
       "slug": "ux-ecommerce",
       "summary": "Guía práctica para reducir el abandono de carrito mejorando la interfaz y el rendimiento.",
-      "content": "<p>Contenido de ejemplo sobre UX en e-commerce.</p>",
+      "content": "<h2>Por qué la UX es clave</h2><p>Una experiencia de compra fluida puede aumentar la tasa de conversión hasta un 35 %. Estos son los puntos críticos a optimizar.</p><img src=\"https://images.unsplash.com/photo-1515169067865-5387ec356754?auto=format&fit=crop&w=800&q=60\" alt=\"Carrito de compra\" class=\"rounded-xl my-6\"/><h3>1. Velocidad de carga</h3><p>Cada segundo extra de carga puede reducir las conversiones un 10 %. Utiliza <code>lazy-loading</code> y comprime imágenes.</p><h3>2. Checkout simplificado</h3><p>Reduce el número de campos y ofrece opciones como <em>Apple Pay</em> o <em>Google Pay</em>.</p><h3>3. Confianza y transparencia</h3><p>Muestra sellos de seguridad y costos de envío desde el principio.</p><h3>4. Búsqueda interna inteligente</h3><p>Integra autocompletado y corrección de errores ortográficos.</p><h3>5. Diseño móvil first</h3><p>Más del 60 % de las compras se hacen en móviles; tu diseño debe adaptarse.</p><p>Implementa estas mejoras y mide el impacto en <strong>Metricas clave</strong> como <em>Average Order Value</em> y <em>Cart Abandonment Rate</em>.</p>",
       "author": {
         "name": "Carlos Ramírez",
         "avatar": "https://randomuser.me/api/portraits/men/75.jpg",
