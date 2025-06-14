@@ -4,11 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "engines": {
-    "node": "22.x"
+    "node": "18.x"
   },
   "scripts": {
+    "generate-posts": "node scripts/generateHugoPosts.js",
     "dev": "vite",
-    "build": "vite build",
+    "build:react": "vite build",
+    "build:hugo": "cd hugo-site && hugo --minify",
+    "build": "npm run build:hugo && npm run build:react && cp -r hugo-site/public/* dist/",
     "preview": "vite preview --host 0.0.0.0 --port $PORT",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "type-check": "tsc"
