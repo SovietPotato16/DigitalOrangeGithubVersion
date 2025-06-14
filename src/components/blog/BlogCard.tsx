@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { Calendar, Clock } from 'lucide-react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 
@@ -16,75 +16,87 @@ interface BlogCardProps {
   categories: string[];
 }
 
-const BlogCard = ({ slug, title, excerpt, date, author, coverImage, categories }: BlogCardProps) => {
+const BlogCard = ({
+  slug,
+  title,
+  excerpt,
+  date,
+  author,
+  coverImage,
+  categories,
+}: BlogCardProps) => {
+  // Convert author name to URL-friendly ID
+  const authorId = author.name
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, '-');
+
   console.log('Rendering BlogCard:', { slug, title }); // Debug log
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      whileHover={{ y: -5 }}
-      transition={{ duration: 0.3 }}
-      className="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-orange-500/30 transition-colors"
-    >
+    <article className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-orange-500/50 transition-all group">
       <Link to={`/blog/${slug}`} className="block">
-        <div className="relative aspect-[16/9] overflow-hidden">
+        <div className="aspect-[16/9] relative overflow-hidden">
           <img
-            src={coverImage || 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1469&auto=format&fit=crop'}
+            src={coverImage || '/images/blog/placeholder.jpg'}
             alt={title}
-            className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
             onError={(e) => {
-              console.error('Error loading image:', coverImage);
-              e.currentTarget.src = 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1469&auto=format&fit=crop';
+              const target = e.target as HTMLImageElement;
+              target.src = '/images/blog/placeholder.jpg';
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-          
-          {/* Categories */}
-          <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">
-            {categories.map((category) => (
-              <span
-                key={category}
-                className="px-3 py-1 text-xs font-medium bg-black/50 text-white rounded-full backdrop-blur-sm"
-              >
-                {category}
-              </span>
-            ))}
-          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+        </div>
+      </Link>
+
+      <div className="p-6">
+        <div className="flex flex-wrap gap-2 mb-4">
+          {categories.map((category) => (
+            <span
+              key={category}
+              className="px-3 py-1 text-xs font-medium bg-orange-500/10 text-orange-500 rounded-full"
+            >
+              {category}
+            </span>
+          ))}
         </div>
 
-        <div className="p-6">
-          <h2 className="text-xl font-bold mb-2 text-white group-hover:text-orange-400 transition-colors">
+        <Link to={`/blog/${slug}`} className="block group">
+          <h2 className="text-xl font-bold mb-2 group-hover:text-orange-500 transition-colors line-clamp-2">
             {title}
           </h2>
-          <p className="text-gray-400 mb-4 line-clamp-2">
-            {excerpt}
-          </p>
-          
-          <div className="flex items-center justify-between">
-            {/* Author info */}
-            <div className="flex items-center space-x-3">
-              <img
-                src={author.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(author.name)}&background=FF6B00&color=fff&size=128`}
-                alt={author.name}
-                className="w-8 h-8 rounded-full object-cover"
-                onError={(e) => {
-                  console.error('Error loading avatar:', author.avatar);
-                  e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(author.name)}&background=FF6B00&color=fff&size=128`;
-                }}
-              />
-              <span className="text-sm text-gray-400">{author.name}</span>
-            </div>
-            
-            {/* Date */}
-            <time className="text-sm text-gray-500">
-              {format(new Date(date), "d 'de' MMMM, yyyy", { locale: es })}
+          <p className="text-gray-400 line-clamp-3 mb-4">{excerpt}</p>
+        </Link>
+
+        <div className="flex items-center justify-between pt-4 border-t border-white/10">
+          <Link
+            to={`/author/${authorId}`}
+            className="flex items-center space-x-3 group"
+          >
+            <img
+              src={author.avatar}
+              alt={author.name}
+              className="w-8 h-8 rounded-full"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(author.name)}&background=FF6B00&color=fff&size=128`;
+              }}
+            />
+            <span className="text-sm text-gray-400 group-hover:text-orange-500 transition-colors">
+              {author.name}
+            </span>
+          </Link>
+          <div className="flex items-center text-sm text-gray-400">
+            <Calendar className="w-4 h-4 mr-1" />
+            <time dateTime={date}>
+              {format(new Date(date), 'd MMMM, yyyy', { locale: es })}
             </time>
           </div>
         </div>
-      </Link>
-    </motion.article>
+      </div>
+    </article>
   );
 };
 

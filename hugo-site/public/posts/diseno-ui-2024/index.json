@@ -1,0 +1,16 @@
+{
+    "id": "fe90fe72b8b0df0efa1d494daa0d18bf",
+    "title": "Tendencias en Diseño UI para 2024",
+    "date": "2024-04-01",
+    "author": {
+        "name": "Carlos Ruiz",
+        "bio": "Diseñador UI/UX Senior y consultor de experiencia de usuario",
+        "avatar": "/images/authors/carlos-ruiz.jpg"
+    },
+    "categories": ["Diseño","UI/UX"],
+    "tags": ["Diseño UI","UX","Tendencias"],
+    "coverImage": "/images/blog/ui-design-2024.jpg",
+    "summary": "Las tendencias más innovadoras en diseño de interfaces de usuario para 2024",
+    "content": "\u003cp\u003eEl diseño de interfaces de usuario continúa evolucionando rápidamente. Descubre las tendencias que están definiendo la experiencia digital en 2024.\u003c/p\u003e\n\u003ch2 id=\"diseño-inmersivo\"\u003eDiseño Inmersivo\u003c/h2\u003e\n\u003cp\u003eLa realidad aumentada y virtual están influyendo en cómo diseñamos interfaces:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eInteracciones 3D\u003c/li\u003e\n\u003cli\u003eGestos naturales\u003c/li\u003e\n\u003cli\u003eEspacios virtuales navegables\u003c/li\u003e\n\u003cli\u003eExperiencias mixtas\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"minimalismo-funcional\"\u003eMinimalismo Funcional\u003c/h2\u003e\n\u003cp\u003eEl minimalismo evoluciona hacia un enfoque más funcional:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eMicrointeracciones sutiles\u003c/li\u003e\n\u003cli\u003eEspacios en blanco estratégicos\u003c/li\u003e\n\u003cli\u003eTipografía con propósito\u003c/li\u003e\n\u003cli\u003ePaletas de color significativas\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"accesibilidad-por-diseño\"\u003eAccesibilidad por Diseño\u003c/h2\u003e\n\u003cp\u003eLa accesibilidad se convierte en prioridad:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eContraste mejorado\u003c/li\u003e\n\u003cli\u003eNavegación intuitiva\u003c/li\u003e\n\u003cli\u003eSoporte para lectores de pantalla\u003c/li\u003e\n\u003cli\u003eDiseño adaptativo\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"personalización-dinámica\"\u003ePersonalización Dinámica\u003c/h2\u003e\n\u003cp\u003eLas interfaces se adaptan al usuario:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eTemas dinámicos\u003c/li\u003e\n\u003cli\u003eContenido personalizado\u003c/li\u003e\n\u003cli\u003eLayouts adaptativos\u003c/li\u003e\n\u003cli\u003ePreferencias del usuario\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003eEl futuro del diseño UI se centra en crear experiencias más inclusivas, personalizadas y naturales para todos los usuarios.\u003c/p\u003e\n",
+    "slug": "diseno-ui-2024"
+} 

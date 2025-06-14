@@ -1,60 +1,26 @@
-import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { ArrowLeft, Calendar } from 'lucide-react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { ArrowLeft, Calendar, Clock, Share2 } from 'lucide-react';
-import { useMDXPosts } from '@/hooks/useMDXPosts';
-import type { Post } from '@/hooks/useMDXPosts';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import { useHugoPosts } from '@/hooks/useHugoPosts';
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { posts, isLoading, error } = useMDXPosts();
-  const [post, setPost] = useState<Post | null>(null);
-
-  useEffect(() => {
-    if (!isLoading && posts.length > 0 && slug) {
-      const foundPost = posts.find(p => p.slug === slug);
-      if (foundPost) {
-        console.log('Found post:', foundPost);
-        setPost(foundPost);
-      } else {
-        console.log('Post not found for slug:', slug);
-      }
-    }
-  }, [isLoading, posts, slug]);
-
-  if (error) {
-    return (
-      <div className="pt-24 pb-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-2xl font-bold text-red-500">Error al cargar el post</h1>
-          <p className="text-gray-400 mt-2">{error.message}</p>
-          <Link to="/blog" className="text-orange-400 hover:text-orange-500 mt-4 inline-block">
-            Volver al blog
-          </Link>
-        </div>
-      </div>
-    );
-  }
+  const { posts, isLoading, error } = useHugoPosts();
+  const post = posts.find(p => p.slug === slug);
 
   if (isLoading) {
     return (
       <div className="pt-24 pb-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="animate-pulse space-y-8">
-            <div className="h-4 bg-white/5 rounded w-1/4" />
+          <div className="animate-pulse">
+            <div className="h-8 bg-white/10 rounded w-3/4 mb-8" />
+            <div className="aspect-[16/9] bg-white/10 rounded-2xl mb-8" />
             <div className="space-y-4">
-              <div className="h-8 bg-white/5 rounded w-3/4" />
-              <div className="h-8 bg-white/5 rounded w-1/2" />
-            </div>
-            <div className="aspect-[16/9] bg-white/5 rounded-2xl" />
-            <div className="space-y-4">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-4 bg-white/5 rounded w-full" />
-              ))}
+              <div className="h-4 bg-white/10 rounded w-full" />
+              <div className="h-4 bg-white/10 rounded w-5/6" />
+              <div className="h-4 bg-white/10 rounded w-4/6" />
             </div>
           </div>
         </div>
@@ -62,12 +28,18 @@ const BlogPost = () => {
     );
   }
 
-  if (!post) {
+  if (error || !post) {
     return (
       <div className="pt-24 pb-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-2xl font-bold text-white">Post no encontrado</h1>
-          <Link to="/blog" className="text-orange-400 hover:text-orange-500 mt-4 inline-block">
+          <h1 className="text-2xl font-bold text-red-500 mb-4">
+            {error ? 'Error al cargar el post' : 'Post no encontrado'}
+          </h1>
+          <Link
+            to="/blog"
+            className="inline-flex items-center text-orange-500 hover:text-orange-400"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
             Volver al blog
           </Link>
         </div>
@@ -76,15 +48,15 @@ const BlogPost = () => {
   }
 
   return (
-    <article className="pt-24 pb-16">
+    <div className="pt-24 pb-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back button */}
         <Link
           to="/blog"
-          className="inline-flex items-center space-x-2 text-orange-400 hover:text-orange-500 mb-8 group"
+          className="inline-flex items-center text-gray-400 hover:text-orange-500 mb-8 transition-colors"
         >
-          <ArrowLeft className="h-4 w-4 transform group-hover:-translate-x-1 transition-transform" />
-          <span>Volver al blog</span>
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Volver al blog
         </Link>
 
         {/* Header */}
@@ -94,33 +66,40 @@ const BlogPost = () => {
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-            {post.metadata.title}
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            {post.title}
           </h1>
+          <p className="text-xl text-gray-400 mb-6">
+            {post.summary}
+          </p>
 
-          {/* Meta info */}
-          <div className="flex flex-wrap items-center gap-4 text-gray-400 text-sm mb-8">
-            <div className="flex items-center space-x-2">
-              <Calendar className="h-4 w-4" />
-              <time>{format(new Date(post.metadata.date), "d 'de' MMMM, yyyy", { locale: es })}</time>
+          {/* Author and date */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <img
+                src={post.author.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(post.author.name)}&background=FF6B00&color=fff&size=128`}
+                alt={post.author.name}
+                className="w-10 h-10 rounded-full"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(post.author.name)}&background=FF6B00&color=fff&size=128`;
+                }}
+              />
+              <div>
+                <span className="block text-sm font-medium text-white">
+                  {post.author.name}
+                </span>
+                <span className="text-xs text-gray-400">
+                  {post.author.bio}
+                </span>
+              </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <Clock className="h-4 w-4" />
-              <span>5 min de lectura</span>
+            <div className="flex items-center text-sm text-gray-400">
+              <Calendar className="w-4 h-4 mr-1" />
+              <time dateTime={post.date}>
+                {format(new Date(post.date), 'd MMMM, yyyy', { locale: es })}
+              </time>
             </div>
-          </div>
-
-          {/* Categories */}
-          <div className="flex flex-wrap gap-2 mb-8">
-            {post.metadata.categories.map((category) => (
-              <Link
-                key={category}
-                to={`/blog?category=${category}`}
-                className="px-3 py-1 text-sm font-medium bg-white/5 text-orange-400 rounded-full hover:bg-white/10 transition-colors"
-              >
-                {category}
-              </Link>
-            ))}
           </div>
         </motion.div>
 
@@ -128,16 +107,16 @@ const BlogPost = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-12"
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mb-12"
         >
           <img
-            src={post.metadata.coverImage}
-            alt={post.metadata.title}
-            className="object-cover w-full h-full"
+            src={post.coverImage || '/images/blog/placeholder.jpg'}
+            alt={post.title}
+            className="w-full aspect-[16/9] object-cover rounded-2xl"
             onError={(e) => {
-              console.error('Error loading cover image:', post.metadata.coverImage);
-              e.currentTarget.src = 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=1470&auto=format&fit=crop';
+              const target = e.target as HTMLImageElement;
+              target.src = '/images/blog/placeholder.jpg';
             }}
           />
         </motion.div>
@@ -146,34 +125,32 @@ const BlogPost = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mdx-content"
-        >
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {post.code}
-          </ReactMarkdown>
-        </motion.div>
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="prose prose-invert prose-lg max-w-none"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
 
-        {/* Share buttons */}
-        <div className="mt-8 flex justify-center">
-          <button
-            onClick={() => {
-              navigator.share({
-                title: post.metadata.title,
-                text: post.metadata.excerpt,
-                url: window.location.href
-              }).catch(() => {
-                navigator.clipboard.writeText(window.location.href);
-              });
-            }}
-            className="inline-flex items-center space-x-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-xl text-gray-400 hover:text-white transition-colors"
-          >
-            <Share2 className="h-4 w-4" />
-            <span>Compartir artículo</span>
-          </button>
-        </div>
+        {/* Categories */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-12 pt-8 border-t border-white/10"
+        >
+          <h3 className="text-lg font-medium mb-4">Categorías</h3>
+          <div className="flex flex-wrap gap-2">
+            {post.categories.map((category) => (
+              <span
+                key={category}
+                className="px-4 py-2 bg-white/5 text-white rounded-xl text-sm"
+              >
+                {category}
+              </span>
+            ))}
+          </div>
+        </motion.div>
       </div>
-    </article>
+    </div>
   );
 };
 

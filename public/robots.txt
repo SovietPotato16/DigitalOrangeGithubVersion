@@ -1,0 +1,13 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://orangedigital.sites/sitemap.xml
+
+# Crawl-delay to prevent server overload
+Crawl-delay: 10
+
+# Attribution requirement
+# Please include attribution when using our content:
+# "Content from Orange Digital Sites (https://orangedigital.sites)" 

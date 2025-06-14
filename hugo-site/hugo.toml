@@ -1,0 +1,15 @@
+baseURL = 'http://localhost:1313'
+languageCode = 'es'
+title = 'Orange Digital Blog'
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  page = ["HTML", "JSON"]
+
+[params]
+  description = "Blog de Orange Digital sobre desarrollo web y tecnología"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

@@ -16,6 +16,7 @@ import Ecommerce from '@/pages/services/Ecommerce';
 import EnterpriseSystems from '@/pages/services/EnterpriseSystems';
 import OrangeDr from '@/pages/services/OrangeDr';
 import OrangeLic from '@/pages/services/OrangeLic';
+import AuthorPage from '@/pages/AuthorPage';
 import './App.css';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/blog/author/:authorId" element={<AuthorPage />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/portfolio" element={<Portfolio />} />

@@ -1,0 +1,19 @@
+{
+  "posts": [
+    {
+      "title": "Ejemplo de Post",
+      "date": "2024-02-20",
+      "slug": "ejemplo-post",
+      "summary": "Este es un post de ejemplo mientras configuramos la integración con Hugo.",
+      "content": "<p>Contenido del post de ejemplo.</p>",
+      "author": {
+        "name": "Autor de Ejemplo",
+        "bio": "Bio del autor",
+        "avatar": "/images/authors/default.jpg"
+      },
+      "categories": ["Ejemplo"],
+      "tags": ["demo"],
+      "coverImage": "/images/blog/placeholder.jpg"
+    }
+  ]
+} 
