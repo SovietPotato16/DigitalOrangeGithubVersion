@@ -5,12 +5,12 @@ services:
   github:
     branch: main
     deploy_on_push: true
-  build_command: npm install && npm run build
+  build_command: npm ci && npm run build
   run_command: npm run preview
   envs:
   - key: NODE_ENV
     value: production
   - key: NODE_VERSION
-    value: 20.x
+    value: 18.x
   - key: NPM_VERSION
-    value: 10.x 
+    value: 10.8.2 
