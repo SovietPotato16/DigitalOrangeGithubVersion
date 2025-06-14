@@ -13,4 +13,4 @@ services:
   - key: NODE_VERSION
     value: 18.x
   - key: NPM_VERSION
-    value: 10.8.2 
+    value: 9.x 
