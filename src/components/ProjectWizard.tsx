@@ -1,4 +1,3 @@
-import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { 
   X, 
@@ -180,15 +179,13 @@ const ProjectWizard = ({ isOpen, onClose }: ProjectWizardProps) => {
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {projectTypes.map((type) => (
-              <motion.button
+              <button
                 key={type.id}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
                 onClick={() => {
                   setFormData({ ...formData, projectType: type.id });
                   handleNext();
                 }}
-                className={`p-6 rounded-2xl bg-white/5 backdrop-blur-sm border ${
+                className={`p-6 rounded-2xl bg-white/5 backdrop-blur-sm border transition-all duration-200 hover:scale-105 active:scale-95 ${
                   formData.projectType === type.id ? 'border-orange-500' : 'border-white/10'
                 } hover:border-orange-500/30 transition-all text-left group relative overflow-hidden`}
               >
@@ -211,7 +208,7 @@ const ProjectWizard = ({ isOpen, onClose }: ProjectWizardProps) => {
                     * Incluye personalización según tus necesidades específicas
                   </div>
                 )}
-              </motion.button>
+              </button>
             ))}
           </div>
         );
@@ -220,21 +217,19 @@ const ProjectWizard = ({ isOpen, onClose }: ProjectWizardProps) => {
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {scales.map((scale) => (
-              <motion.button
+              <button
                 key={scale.id}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
                 onClick={() => {
                   setFormData({ ...formData, scale: scale.id });
                   handleNext();
                 }}
-                className={`p-6 rounded-2xl bg-white/5 backdrop-blur-sm border ${
+                className={`p-6 rounded-2xl bg-white/5 backdrop-blur-sm border transition-all duration-200 hover:scale-105 active:scale-95 ${
                   formData.scale === scale.id ? 'border-orange-500' : 'border-white/10'
                 } hover:border-orange-500/30 transition-all text-left group`}
               >
                 <h3 className="text-xl font-semibold text-white mb-2">{scale.name}</h3>
                 <p className="text-gray-400">{scale.description}</p>
-              </motion.button>
+              </button>
             ))}
           </div>
         );
@@ -328,14 +323,12 @@ const ProjectWizard = ({ isOpen, onClose }: ProjectWizardProps) => {
                 placeholder="Nombre de tu empresa"
               />
             </div>
-            <motion.button
+            <button
               type="submit"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full px-6 py-3 text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg font-medium hover:from-orange-600 hover:to-orange-700 transition-all focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+              className="w-full px-6 py-3 text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg font-medium hover:from-orange-600 hover:to-orange-700 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900"
             >
               Enviar y ver recomendación
-            </motion.button>
+            </button>
           </form>
         );
 
@@ -345,37 +338,23 @@ const ProjectWizard = ({ isOpen, onClose }: ProjectWizardProps) => {
   };
 
   return (
-    <AnimatePresence mode="wait">
+    <>
       {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-50 overflow-y-auto"
+        <div
+          className="fixed inset-0 z-50 overflow-y-auto transition-opacity duration-200"
           onClick={handleBackdropClick}
         >
           <div className="min-h-screen px-4 text-center">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-gray-900/90 backdrop-blur-sm"
-            />
+            <div className="fixed inset-0 bg-gray-900/90 backdrop-blur-sm transition-opacity duration-200" />
             
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.2 }}
-              className="relative inline-block w-full max-w-4xl my-8 overflow-hidden text-left align-middle"
+            <div
+              className="relative inline-block w-full max-w-4xl my-8 overflow-hidden text-left align-middle transform transition-all duration-200"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative bg-gray-900/80 backdrop-blur-md p-8 rounded-2xl border border-white/10">
                 <button
                   onClick={onClose}
-                  className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/10 transition-colors"
+                  className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/10 transition-colors duration-200"
                 >
                   <X className="h-6 w-6 text-gray-400" />
                 </button>
@@ -387,10 +366,9 @@ const ProjectWizard = ({ isOpen, onClose }: ProjectWizardProps) => {
 
                 <div className="mb-8">
                   <div className="relative h-2 bg-white/10 rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-                      className="absolute h-full bg-gradient-to-r from-orange-500 to-orange-600"
+                    <div
+                      className="absolute h-full bg-gradient-to-r from-orange-500 to-orange-600 transition-all duration-300"
+                      style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
                     />
                   </div>
                 </div>
@@ -399,32 +377,28 @@ const ProjectWizard = ({ isOpen, onClose }: ProjectWizardProps) => {
 
                 <div className="mt-8 flex justify-between">
                   {currentStep > 0 && (
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                    <button
                       onClick={handleBack}
-                      className="px-6 py-3 text-white bg-white/10 rounded-lg font-medium hover:bg-white/20 transition-all"
+                      className="px-6 py-3 text-white bg-white/10 rounded-lg font-medium hover:bg-white/20 transition-all duration-200 hover:scale-105 active:scale-95"
                     >
                       Anterior
-                    </motion.button>
+                    </button>
                   )}
                   {currentStep < steps.length - 1 && (
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                    <button
                       onClick={handleNext}
-                      className="px-6 py-3 text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg font-medium hover:from-orange-600 hover:to-orange-700 transition-all"
+                      className="px-6 py-3 text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg font-medium hover:from-orange-600 hover:to-orange-700 transition-all duration-200 hover:scale-105 active:scale-95"
                     >
                       Siguiente
-                    </motion.button>
+                    </button>
                   )}
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       )}
-    </AnimatePresence>
+    </>
   );
 };
 

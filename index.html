@@ -6,22 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Digital Orange Sites - Sitios web profesionales entregados en 48 horas. Especialistas en portafolios, e-commerce, menús digitales y más." />
     <meta name="keywords" content="diseño web, desarrollo web, sitios web rápidos, e-commerce, portafolios, menús digitales" />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;">
     <title>Digital Orange Sites - Sitios web en 48 horas</title>
     <!-- Preload critical assets -->
     <link rel="preload" href="/src/main.tsx" as="script" type="module" />
-    <!-- Defer non-critical JavaScript -->
-    <script defer async src="https://www.googletagmanager.com/gtag/js?id=G-H9JCDRGWDS"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-H9JCDRGWDS', {
-        'send_page_view': false
-      });
+      gtag('config', 'G-H9JCDRGWDS');
     </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Load Google Tag Manager after the main content -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H9JCDRGWDS"></script>
   </body>
 </html>

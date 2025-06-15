@@ -10,7 +10,13 @@ import viteImagemin from 'vite-plugin-imagemin';
 
 export default defineConfig({
   plugins: [
-    react(),
+    react({
+      babel: {
+        plugins: [
+          ['@babel/plugin-transform-runtime'],
+        ],
+      },
+    }),
     mdx({
       remarkPlugins: [remarkGfm],
       rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings, rehypePrism],
@@ -49,10 +55,15 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  base: '/',
   optimizeDeps: {
-    include: ['lucide-react'],
+    include: ['react', 'react-dom', 'react-router-dom', 'lucide-react'],
+    exclude: ['@mdx-js/react','framer-motion',"styled-components"],
     esbuildOptions: {
-      target: 'es2020'
+      target: 'es2020',
+      supported: {
+        'top-level-await': true
+      },
     }
   },
   build: {
@@ -63,33 +74,34 @@ export default defineConfig({
       output: {
         manualChunks: (id) => {
           if (id.includes('node_modules')) {
-            if (id.includes('lucide-react')) {
-              return 'vendor_lucide';
-            }
-            if (id.includes('react')) {
-              return 'vendor_react';
-            }
+            if (id.includes('framer-motion')) return 'framer-motion';
+            if (id.includes('react')) return 'vendor_react';
+            if (id.includes('lucide')) return 'vendor_lucide';
             return 'vendor';
           }
         },
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name.endsWith('.css')) {
-            return 'assets/css/[name]-[hash][extname]';
-          }
-          return 'assets/[name]-[hash][extname]';
-        },
-        chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js',
       }
     },
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: false,
+    sourcemap: true,
     minify: 'terser',
     target: 'es2020',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    },
     cssCodeSplit: true,
     reportCompressedSize: false,
     chunkSizeWarningLimit: 1000,
+  },
+  preview: {
+    port: 4173,
+    strictPort: true,
+    host: true,
+    cors: true
   },
   server: {
     proxy: {
