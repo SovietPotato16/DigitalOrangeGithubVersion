@@ -233,6 +233,70 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Brands Carousel Section */}
+      <section className="relative py-20 bg-white/5 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+              Confían en nosotros
+            </h2>
+            <p className="text-lg text-gray-400">
+              Empresas que han transformado su presencia digital con Digital Orange
+            </p>
+          </div>
+          
+          {/* Brands Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
+            {[
+              { name: 'TechStart', logo: '🚀' },
+              { name: 'FoodieMax', logo: '🍕' },
+              { name: 'StyleCo', logo: '👔' },
+              { name: 'HealthPro', logo: '🏥' },
+              { name: 'EduTech', logo: '📚' },
+              { name: 'GreenLife', logo: '🌱' },
+              { name: 'AutoMax', logo: '🚗' },
+              { name: 'FitZone', logo: '💪' },
+              { name: 'ArtSpace', logo: '🎨' },
+              { name: 'LegalPro', logo: '⚖️' },
+              { name: 'TravelWise', logo: '✈️' },
+              { name: 'PhotoStudio', logo: '📸' }
+            ].map((brand, index) => (
+              <div 
+                key={index}
+                className="flex flex-col items-center justify-center p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-orange-500/30 transition-all hover:scale-105 group"
+              >
+                <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">
+                  {brand.logo}
+                </div>
+                <span className="text-sm font-medium text-gray-300 group-hover:text-orange-400 transition-colors">
+                  {brand.name}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Stats */}
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div className="p-6">
+              <div className="text-3xl md:text-4xl font-bold text-orange-400 mb-2">500+</div>
+              <div className="text-sm text-gray-400">Proyectos completados</div>
+            </div>
+            <div className="p-6">
+              <div className="text-3xl md:text-4xl font-bold text-pink-400 mb-2">48h</div>
+              <div className="text-sm text-gray-400">Tiempo promedio</div>
+            </div>
+            <div className="p-6">
+              <div className="text-3xl md:text-4xl font-bold text-purple-400 mb-2">99%</div>
+              <div className="text-sm text-gray-400">Satisfacción</div>
+            </div>
+            <div className="p-6">
+              <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">24/7</div>
+              <div className="text-sm text-gray-400">Soporte</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="relative py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

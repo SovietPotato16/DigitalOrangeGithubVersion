@@ -46,6 +46,12 @@ const sendEmail = async (emailData: EmailData): Promise<boolean> => {
   }
 
   try {
+    console.log('🚀 Sending email via Formspree...', {
+      endpoint: FORMSPREE_CONFIG.ENDPOINT,
+      subject: emailData.subject,
+      from: emailData.from
+    });
+
     // Use Formspree to send emails to the configured recipient
     const response = await fetch(FORMSPREE_CONFIG.ENDPOINT, {
       method: 'POST',
@@ -56,18 +62,24 @@ const sendEmail = async (emailData: EmailData): Promise<boolean> => {
       body: JSON.stringify({
         email: emailData.from || 'noreply@digitalorange.com.mx',
         message: emailData.html, // Now contains formatted plain text
-        subject: emailData.subject,
         _replyto: emailData.from || 'noreply@digitalorange.com.mx',
         _subject: emailData.subject
       }),
     });
 
+    console.log('📡 Formspree response status:', response.status);
+    console.log('📋 Response headers:', Object.fromEntries(response.headers.entries()));
+
     if (!response.ok) {
-      console.warn('Formspree request failed, using fallback...');
+      console.error('❌ Formspree request failed:', response.status, response.statusText);
+      const errorText = await response.text();
+      console.error('📄 Error details:', errorText);
+      console.warn('🔄 Using fallback method...');
       return sendEmailFallback(emailData);
     }
 
     const result = await response.json();
+    console.log('✅ Formspree response:', result);
     return result.ok || response.status === 200;
   } catch (error) {
     console.error('Error sending email via Formspree:', error);
