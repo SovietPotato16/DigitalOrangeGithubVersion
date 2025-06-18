@@ -47,13 +47,13 @@ const sendEmail = async (emailData: EmailData): Promise<boolean> => {
 
   try {
     console.log('🚀 Sending email via Formspree...', {
-      endpoint: FORMSPREE_CONFIG.ENDPOINT,
+      endpoint: FORMSPREE_CONFIG.PROJECT_WIZARD_ENDPOINT,
       subject: emailData.subject,
       from: emailData.from
     });
 
     // Use Formspree to send emails to the configured recipient
-    const response = await fetch(FORMSPREE_CONFIG.ENDPOINT, {
+    const response = await fetch(FORMSPREE_CONFIG.PROJECT_WIZARD_ENDPOINT, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -63,7 +63,12 @@ const sendEmail = async (emailData: EmailData): Promise<boolean> => {
         email: emailData.from || 'noreply@digitalorange.com.mx',
         message: emailData.html, // Now contains formatted plain text
         _replyto: emailData.from || 'noreply@digitalorange.com.mx',
-        _subject: emailData.subject
+        _subject: emailData.subject,
+        // Anti-spam fields - provide more context to email providers
+        _cc: 'hola@digitalorange.com.mx',
+        _format: 'text',
+        _language: 'es',
+        _template: 'table'
       }),
     });
 
@@ -221,14 +226,107 @@ export const submitProjectWizardForm = async (formData: ProjectWizardFormData): 
   return await sendEmail(emailData);
 };
 
-// Export functions for Contact form submission
+// Special function for Contact form submission with form-data format (less likely to be spam)
 export const submitContactForm = async (formData: ContactFormData): Promise<boolean> => {
-  const emailData: EmailData = {
-    to: EMAIL_CONFIG.recipientEmail,
-    from: formData.email, // Use customer email as sender
-    subject: `💬 Nuevo Mensaje de Contacto - ${formData.name}`,
-    html: generateContactEmailText(formData)
+  // Completar campos faltantes con valores por defecto para evitar spam
+  const completeFormData: ContactFormData = {
+    name: formData.name || 'No especificado',
+    email: formData.email || 'no-especificado@cliente.com',
+    phone: formData.phone || 'No especificado', 
+    company: formData.company || 'No especificado',
+    service: formData.service || 'Consulta general',
+    message: formData.message || 'Solicitud de información general'
   };
 
-  return await sendEmail(emailData);
+  // Validar que tenemos los campos mínimos requeridos (después de completar)
+  if (!completeFormData.name || !completeFormData.email || !completeFormData.phone || !completeFormData.service || !completeFormData.message) {
+    console.error('❌ Campos requeridos faltantes en formulario de contacto');
+    return false;
+  }
+
+  // Check if Formspree is properly configured
+  if (!validateFormspreeConfig()) {
+    console.warn('⚠️ Formspree not configured. Using fallback method...');
+    const emailData: EmailData = {
+      to: EMAIL_CONFIG.recipientEmail,
+      from: formData.email,
+      subject: `💬 Contacto Digital Orange - ${formData.name} - ${formData.service}`,
+      html: generateContactEmailText(formData)
+    };
+    return sendEmailFallback(emailData);
+  }
+
+  try {
+    console.log('🚀 Sending contact form via Formspree...', {
+      endpoint: FORMSPREE_CONFIG.CONTACT_FORM_ENDPOINT,
+      name: formData.name,
+      service: formData.service
+    });
+
+    // Use form-data format instead of JSON for contact forms (better spam detection)
+    const response = await fetch(FORMSPREE_CONFIG.CONTACT_FORM_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json'
+        // No Content-Type header - let browser set it for form data
+      },
+      body: (() => {
+        const form = new FormData();
+        
+        // Structured data fields for better spam detection
+        form.append('name', formData.name);
+        form.append('email', formData.email);
+        form.append('phone', formData.phone);
+        form.append('company', formData.company || '');
+        form.append('service', formData.service);
+        form.append('message', formData.message);
+        
+        // Formspree specific fields
+        form.append('_replyto', formData.email);
+        form.append('_subject', `💬 Contacto Digital Orange - ${formData.name} - ${formData.service}`);
+        form.append('_format', 'text');
+        form.append('_language', 'es');
+        
+        // Additional context to prevent spam
+        form.append('_website', 'digitalorange.com.mx');
+        form.append('_form_type', 'contact_form');
+        form.append('_timestamp', new Date().toISOString());
+        
+        return form;
+      })()
+    });
+
+    console.log('📡 Formspree response status:', response.status);
+
+    if (!response.ok) {
+      console.error('❌ Formspree request failed:', response.status, response.statusText);
+      const errorText = await response.text();
+      console.error('📄 Error details:', errorText);
+      console.warn('🔄 Using fallback method...');
+      
+      const emailData: EmailData = {
+        to: EMAIL_CONFIG.recipientEmail,
+        from: formData.email,
+        subject: `💬 Contacto Digital Orange - ${formData.name} - ${formData.service}`,
+        html: generateContactEmailText(formData)
+      };
+      return sendEmailFallback(emailData);
+    }
+
+    const result = await response.json();
+    console.log('✅ Contact form response:', result);
+    return result.ok || response.status === 200;
+    
+  } catch (error) {
+    console.error('Error sending contact form via Formspree:', error);
+    console.warn('Using fallback method...');
+    
+    const emailData: EmailData = {
+      to: EMAIL_CONFIG.recipientEmail,
+      from: formData.email,
+      subject: `💬 Contacto Digital Orange - ${formData.name} - ${formData.service}`,
+      html: generateContactEmailText(formData)
+    };
+    return sendEmailFallback(emailData);
+  }
 }; 

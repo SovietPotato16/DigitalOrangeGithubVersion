@@ -5,23 +5,39 @@
  * SETUP INSTRUCTIONS:
  * 
  * 1. Go to https://formspree.io and create a free account
- * 2. Create a new form with these settings:
+ * 2. Create TWO separate forms:
+ *    
+ *    FORM 1 - Project Wizard:
  *    - Email: hola@digitalorange.com.mx
- *    - Form Name: "Digital Orange Contact Forms"
- * 3. Copy your form ID from the Formspree dashboard
- * 4. Replace 'YOUR_FORM_ID' below with your actual form ID
+ *    - Form Name: "Digital Orange Project Wizard"
+ *    - Form ID: xnnvzdwg
+ *    
+ *    FORM 2 - Contact Page:
+ *    - Email: hola@digitalorange.com.mx  
+ *    - Form Name: "Digital Orange Contact Form"
+ *    - Form ID: xyzjpwvv
  * 
- * Example: If your endpoint is https://formspree.io/f/xvgpzmjq
- * Then FORMSPREE_FORM_ID should be 'xvgpzmjq'
+ * 3. Each form will have its own endpoint and will handle different data structures
+ * 4. This prevents spam detection issues from mixing different field structures
  */
 
 export const FORMSPREE_CONFIG = {
-  // Replace with your actual Formspree form ID
-  FORM_ID: 'xnnvzdwg',
+  // Form IDs for different forms
+  PROJECT_WIZARD_FORM_ID: 'xnnvzdwg',
+  CONTACT_FORM_ID: 'xyzjpwvv',
   
-  // Full endpoint URL
+  // Endpoints for each form type
+  get PROJECT_WIZARD_ENDPOINT() {
+    return `https://formspree.io/f/${this.PROJECT_WIZARD_FORM_ID}`;
+  },
+  
+  get CONTACT_FORM_ENDPOINT() {
+    return `https://formspree.io/f/${this.CONTACT_FORM_ID}`;
+  },
+  
+  // Legacy endpoint (for backward compatibility)
   get ENDPOINT() {
-    return `https://formspree.io/f/${this.FORM_ID}`;
+    return this.PROJECT_WIZARD_ENDPOINT;
   },
   
   // Email settings
@@ -50,8 +66,9 @@ export const FALLBACK_EMAIL = {
 
 // Validation helper
 export const validateFormspreeConfig = () => {
-  if (FORMSPREE_CONFIG.FORM_ID === 'YOUR_FORM_ID') {
-    console.warn('⚠️ Formspree not configured! Please update FORM_ID in src/config/formspree.ts');
+  if (FORMSPREE_CONFIG.PROJECT_WIZARD_FORM_ID === 'YOUR_FORM_ID' || 
+      FORMSPREE_CONFIG.CONTACT_FORM_ID === 'YOUR_FORM_ID') {
+    console.warn('⚠️ Formspree not configured! Please update form IDs in src/config/formspree.ts');
     return false;
   }
   return true;
