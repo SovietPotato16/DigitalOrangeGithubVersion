@@ -35,6 +35,8 @@ const EMAIL_CONFIG = {
   fromEmail: 'noreply@digitalorange.com.mx'
 };
 
+
+
 // Function to send email using Formspree service
 const sendEmail = async (emailData: EmailData): Promise<boolean> => {
   // Check if Formspree is properly configured
@@ -53,11 +55,10 @@ const sendEmail = async (emailData: EmailData): Promise<boolean> => {
       },
       body: JSON.stringify({
         email: emailData.from || 'noreply@digitalorange.com.mx',
-        message: emailData.html,
+        message: emailData.html, // Now contains formatted plain text
         subject: emailData.subject,
         _replyto: emailData.from || 'noreply@digitalorange.com.mx',
-        _subject: emailData.subject,
-        _template: 'basic'
+        _subject: emailData.subject
       }),
     });
 
@@ -78,11 +79,8 @@ const sendEmail = async (emailData: EmailData): Promise<boolean> => {
 // Fallback function using mailto (always works)
 const sendEmailFallback = (emailData: EmailData): boolean => {
   try {
-    // Create plain text version of the email content
-    const plainTextContent = emailData.html.replace(/<[^>]*>/g, '').replace(/\n\s*\n/g, '\n');
-    
-    // Generate mailto URL
-    const mailtoUrl = FALLBACK_EMAIL.generateMailto(emailData.subject, plainTextContent);
+    // Generate mailto URL (emailData.html now contains formatted plain text)
+    const mailtoUrl = FALLBACK_EMAIL.generateMailto(emailData.subject, emailData.html);
     
     // Open mailto link
     window.open(mailtoUrl, '_blank');
@@ -94,8 +92,8 @@ const sendEmailFallback = (emailData: EmailData): boolean => {
   }
 };
 
-// Function to generate HTML template for Project Wizard submissions
-const generateProjectWizardEmailHTML = (formData: ProjectWizardFormData): string => {
+// Function to generate formatted plain text for Project Wizard submissions
+const generateProjectWizardEmailText = (formData: ProjectWizardFormData): string => {
   const projectTypeNames: Record<string, string> = {
     'website': 'Sitio Web',
     'website_ecommerce': 'Sitio Web + E-commerce',
@@ -112,163 +110,91 @@ const generateProjectWizardEmailHTML = (formData: ProjectWizardFormData): string
     'startup': 'Startup'
   };
 
+  const timelineNames: Record<string, string> = {
+    'urgent': 'Urgente (48h)',
+    'normal': 'Normal (2-4 semanas)',
+    'custom': 'Personalizado'
+  };
+
+  const budgetNames: Record<string, string> = {
+    'small': '$1,000 - $3,000',
+    'medium': '$3,000 - $7,000',
+    'large': '$7,000 - $15,000',
+    'enterprise': '$15,000+'
+  };
+
   return `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <title>Nueva Consulta de Proyecto - Project Wizard</title>
-      <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
-        .content { background: #f9f9f9; padding: 20px; border-radius: 0 0 8px 8px; }
-        .field { margin-bottom: 15px; }
-        .label { font-weight: bold; color: #f97316; }
-        .value { margin-top: 5px; }
-        .features-list { list-style: none; padding: 0; }
-        .features-list li { padding: 5px 0; border-bottom: 1px solid #eee; }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <div class="header">
-          <h1>🚀 Nueva Consulta de Proyecto</h1>
-          <p>Recibido a través del Project Wizard</p>
-        </div>
-        
-        <div class="content">
-          <div class="field">
-            <div class="label">📧 Email:</div>
-            <div class="value">${formData.email}</div>
-          </div>
-          
-          <div class="field">
-            <div class="label">👤 Nombre:</div>
-            <div class="value">${formData.name || 'No proporcionado'}</div>
-          </div>
-          
-          <div class="field">
-            <div class="label">📞 Teléfono:</div>
-            <div class="value">${formData.phone || 'No proporcionado'}</div>
-          </div>
-          
-          <div class="field">
-            <div class="label">🏢 Empresa:</div>
-            <div class="value">${formData.company || 'No proporcionado'}</div>
-          </div>
-          
-          <div class="field">
-            <div class="label">💼 Tipo de Proyecto:</div>
-            <div class="value">${projectTypeNames[formData.projectType] || formData.projectType}</div>
-          </div>
-          
-          <div class="field">
-            <div class="label">📏 Escala del Proyecto:</div>
-            <div class="value">${scaleNames[formData.scale] || formData.scale}</div>
-          </div>
-          
-          <div class="field">
-            <div class="label">⏰ Timeline:</div>
-            <div class="value">${formData.timeline}</div>
-          </div>
-          
-          <div class="field">
-            <div class="label">💰 Presupuesto:</div>
-            <div class="value">${formData.budget}</div>
-          </div>
-          
-          ${formData.features.length > 0 ? `
-          <div class="field">
-            <div class="label">✨ Funcionalidades Seleccionadas:</div>
-            <ul class="features-list">
-              ${formData.features.map(feature => `<li>• ${feature}</li>`).join('')}
-            </ul>
-          </div>
-          ` : ''}
-          
-          <div style="margin-top: 30px; padding: 15px; background: #fff; border-left: 4px solid #f97316;">
-            <strong>🎯 Próximos Pasos:</strong><br>
-            1. Revisar los requerimientos del proyecto<br>
-            2. Preparar propuesta personalizada<br>
-            3. Contactar al cliente en las próximas 2 horas<br>
-          </div>
-        </div>
-      </div>
-    </body>
-    </html>
-  `;
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 NUEVA CONSULTA DE PROYECTO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Recibido a través del Project Wizard
+
+📋 INFORMACIÓN DE CONTACTO
+────────────────────────────────────────────────────
+📧 Email: ${formData.email}
+👤 Nombre: ${formData.name || 'No proporcionado'}
+📞 Teléfono: ${formData.phone || 'No proporcionado'}
+🏢 Empresa: ${formData.company || 'No proporcionado'}
+
+💼 DETALLES DEL PROYECTO
+────────────────────────────────────────────────────
+🎯 Tipo de Proyecto: ${projectTypeNames[formData.projectType] || formData.projectType}
+📏 Escala del Proyecto: ${scaleNames[formData.scale] || formData.scale}
+⏰ Timeline: ${timelineNames[formData.timeline] || formData.timeline}
+💰 Presupuesto: ${budgetNames[formData.budget] || formData.budget}
+
+${formData.features.length > 0 ? `✨ FUNCIONALIDADES SELECCIONADAS
+────────────────────────────────────────────────────
+${formData.features.map(feature => `  • ${feature}`).join('\n')}
+
+` : ''}🎯 PRÓXIMOS PASOS
+────────────────────────────────────────────────────
+1. Revisar los requerimientos del proyecto
+2. Preparar propuesta personalizada
+3. Contactar al cliente en las próximas 2 horas
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📧 Email enviado automáticamente desde Digital Orange Sites
+🌐 https://digitalorange.com.mx
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
 };
 
-// Function to generate HTML template for Contact form submissions
-const generateContactEmailHTML = (formData: ContactFormData): string => {
+// Function to generate formatted plain text for Contact form submissions
+const generateContactEmailText = (formData: ContactFormData): string => {
   return `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <title>Nuevo Mensaje de Contacto</title>
-      <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
-        .content { background: #f9f9f9; padding: 20px; border-radius: 0 0 8px 8px; }
-        .field { margin-bottom: 15px; }
-        .label { font-weight: bold; color: #f97316; }
-        .value { margin-top: 5px; }
-        .message-box { background: #fff; padding: 15px; border-radius: 6px; border-left: 4px solid #f97316; }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <div class="header">
-          <h1>💬 Nuevo Mensaje de Contacto</h1>
-          <p>Recibido desde el formulario de contacto</p>
-        </div>
-        
-        <div class="content">
-          <div class="field">
-            <div class="label">📧 Email:</div>
-            <div class="value">${formData.email}</div>
-          </div>
-          
-          <div class="field">
-            <div class="label">👤 Nombre:</div>
-            <div class="value">${formData.name}</div>
-          </div>
-          
-          <div class="field">
-            <div class="label">📞 Teléfono:</div>
-            <div class="value">${formData.phone}</div>
-          </div>
-          
-          ${formData.company ? `
-          <div class="field">
-            <div class="label">🏢 Empresa:</div>
-            <div class="value">${formData.company}</div>
-          </div>
-          ` : ''}
-          
-          <div class="field">
-            <div class="label">🎯 Servicio de Interés:</div>
-            <div class="value">${formData.service}</div>
-          </div>
-          
-          <div class="field">
-            <div class="label">💬 Mensaje:</div>
-            <div class="message-box">${formData.message}</div>
-          </div>
-          
-          <div style="margin-top: 30px; padding: 15px; background: #fff; border-left: 4px solid #f97316;">
-            <strong>📞 Responder en menos de 24 horas</strong><br>
-            Email: <a href="mailto:${formData.email}">${formData.email}</a><br>
-            Teléfono: <a href="tel:${formData.phone}">${formData.phone}</a>
-          </div>
-        </div>
-      </div>
-    </body>
-    </html>
-  `;
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💬 NUEVO MENSAJE DE CONTACTO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Recibido desde el formulario de contacto
+
+📋 INFORMACIÓN DE CONTACTO
+────────────────────────────────────────────────────
+📧 Email: ${formData.email}
+👤 Nombre: ${formData.name}
+📞 Teléfono: ${formData.phone}${formData.company ? `
+🏢 Empresa: ${formData.company}` : ''}
+
+🎯 CONSULTA
+────────────────────────────────────────────────────
+🛠️ Servicio de Interés: ${formData.service}
+
+💬 MENSAJE:
+────────────────────────────────────────────────────
+${formData.message}
+
+📞 INFORMACIÓN PARA RESPUESTA
+────────────────────────────────────────────────────
+✦ Responder en menos de 24 horas ✦
+
+📧 Email: ${formData.email}
+📞 Teléfono: ${formData.phone}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📧 Email enviado automáticamente desde Digital Orange Sites
+🌐 https://digitalorange.com.mx
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
 };
 
 // Export functions for Project Wizard form submission
@@ -277,7 +203,7 @@ export const submitProjectWizardForm = async (formData: ProjectWizardFormData): 
     to: EMAIL_CONFIG.recipientEmail,
     from: formData.email, // Use customer email as sender
     subject: `🚀 Nueva Consulta de Proyecto - ${formData.name || formData.email}`,
-    html: generateProjectWizardEmailHTML(formData)
+    html: generateProjectWizardEmailText(formData)
   };
 
   return await sendEmail(emailData);
@@ -289,7 +215,7 @@ export const submitContactForm = async (formData: ContactFormData): Promise<bool
     to: EMAIL_CONFIG.recipientEmail,
     from: formData.email, // Use customer email as sender
     subject: `💬 Nuevo Mensaje de Contacto - ${formData.name}`,
-    html: generateContactEmailHTML(formData)
+    html: generateContactEmailText(formData)
   };
 
   return await sendEmail(emailData);
