@@ -8,18 +8,19 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
+import { submitContactForm } from '@/services/emailService';
+import { toast } from 'react-hot-toast';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    projectType: '',
-    budget: '',
-    message: '',
-    timeline: ''
+    company: '',
+    service: '',
+    message: ''
   });
-  const { toast } = useToast();
+  const { toast: uiToast } = useToast();
 
   const contactInfo = [
     {
@@ -75,21 +76,57 @@ const Contact = () => {
     'No tengo prisa'
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "¡Mensaje enviado!",
-      description: "Nos pondremos en contacto contigo en las próximas 2 horas.",
-    });
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      projectType: '',
-      budget: '',
-      message: '',
-      timeline: ''
-    });
+    
+    try {
+      // Mostrar mensaje de carga
+      toast.loading('Enviando mensaje...', { id: 'contact-form' });
+      
+      // Enviar formulario por email
+      const success = await submitContactForm(formData);
+      
+      if (success) {
+        // Mostrar mensaje de éxito
+        toast.success(
+          '¡Mensaje enviado correctamente! Nos pondremos en contacto contigo en las próximas 24 horas.',
+          { 
+            id: 'contact-form',
+            duration: 5000 
+          }
+        );
+        
+        // Limpiar formulario después de envío exitoso
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          service: '',
+          message: ''
+        });
+        
+      } else {
+        // Mostrar mensaje de error
+        toast.error(
+          'Hubo un problema al enviar tu mensaje. Por favor intenta nuevamente.',
+          { 
+            id: 'contact-form',
+            duration: 5000 
+          }
+        );
+      }
+      
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      toast.error(
+        'Error inesperado. Por favor intenta nuevamente.',
+        { 
+          id: 'contact-form',
+          duration: 5000 
+        }
+      );
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -116,8 +153,7 @@ const Contact = () => {
               className="p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-orange-500/30 transition-all hover:shadow-[0_8px_30px_rgb(255,107,53,0.1)]"
             >
               <form
-                action="https://formspree.io/f/hola@digitalorange.com.mx"
-                method="POST"
+                onSubmit={handleSubmit}
                 className="space-y-6"
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -127,9 +163,10 @@ const Contact = () => {
                     </label>
                     <input
                       type="text"
-                      name="name"
                       id="name"
                       required
+                      value={formData.name}
+                      onChange={(e) => handleInputChange('name', e.target.value)}
                       className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:border-orange-500/50 transition-colors"
                       placeholder="Tu nombre"
                     />
@@ -140,9 +177,10 @@ const Contact = () => {
                     </label>
                     <input
                       type="email"
-                      name="email"
                       id="email"
                       required
+                      value={formData.email}
+                      onChange={(e) => handleInputChange('email', e.target.value)}
                       className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:border-orange-500/50 transition-colors"
                       placeholder="tu@email.com"
                     />
@@ -154,8 +192,9 @@ const Contact = () => {
                   </label>
                   <input
                     type="text"
-                    name="company"
                     id="company"
+                    value={formData.company}
+                    onChange={(e) => handleInputChange('company', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:border-orange-500/50 transition-colors"
                     placeholder="Nombre de tu empresa"
                   />
@@ -166,9 +205,10 @@ const Contact = () => {
                   </label>
                   <input
                     type="tel"
-                    name="phone"
                     id="phone"
                     required
+                    value={formData.phone}
+                    onChange={(e) => handleInputChange('phone', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:border-orange-500/50 transition-colors"
                     placeholder="Tu número de teléfono"
                   />
@@ -178,9 +218,10 @@ const Contact = () => {
                     Servicio de interés
                   </label>
                   <select
-                    name="service"
                     id="service"
                     required
+                    value={formData.service}
+                    onChange={(e) => handleInputChange('service', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:border-orange-500/50 transition-colors"
                   >
                     <option value="">Selecciona un servicio</option>
@@ -197,10 +238,11 @@ const Contact = () => {
                     Mensaje
                   </label>
                   <textarea
-                    name="message"
                     id="message"
                     rows={4}
                     required
+                    value={formData.message}
+                    onChange={(e) => handleInputChange('message', e.target.value)}
                     className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:border-orange-500/50 transition-colors resize-none"
                     placeholder="¿Cómo podemos ayudarte?"
                   ></textarea>
@@ -254,10 +296,10 @@ const Contact = () => {
                 Te responderemos en menos de 24 horas
               </p>
               <a
-                href="mailto:contacto@digitalorange.com"
+                href="mailto:hola@digitalorange.com.mx"
                 className="text-orange-400 hover:text-orange-500 transition-colors font-medium"
               >
-                contacto@digitalorange.com
+                hola@digitalorange.com.mx
               </a>
             </motion.div>
 

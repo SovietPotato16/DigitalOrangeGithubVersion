@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import '@/utils/setupHelper'; // Auto-check setup status in development
 import Home from '@/pages/Home';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';

@@ -10,6 +10,8 @@ import {
 } from 'lucide-react';
 import ProjectFeatures from './ProjectFeatures';
 import ProjectTimeline from './ProjectTimeline';
+import { submitProjectWizardForm } from '@/services/emailService';
+import { toast } from 'react-hot-toast';
 
 type ProjectType = 'website' | 'website_ecommerce' | 'medical' | 'legal' | 'dental' | 'enterprise';
 type ProjectScale = 'small' | 'medium' | 'corporate' | 'startup';
@@ -162,8 +164,50 @@ const ProjectWizard = ({ isOpen, onClose }: ProjectWizardProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implementar envío de datos y recomendación de planes
-    onClose();
+    
+    try {
+      // Mostrar mensaje de carga
+      toast.loading('Enviando información del proyecto...', { id: 'project-wizard' });
+      
+      // Enviar datos del formulario por email
+      const success = await submitProjectWizardForm(formData);
+      
+      if (success) {
+        // Mostrar mensaje de éxito
+        toast.success(
+          '¡Información enviada correctamente! Nos pondremos en contacto contigo en las próximas 2 horas para enviarte una propuesta personalizada.',
+          { 
+            id: 'project-wizard',
+            duration: 5000 
+          }
+        );
+        
+        // Cerrar el wizard después de envío exitoso
+        setTimeout(() => {
+          onClose();
+        }, 2000);
+        
+      } else {
+        // Mostrar mensaje de error
+        toast.error(
+          'Hubo un problema al enviar tu información. Por favor intenta nuevamente o contáctanos directamente.',
+          { 
+            id: 'project-wizard',
+            duration: 5000 
+          }
+        );
+      }
+      
+    } catch (error) {
+      console.error('Error submitting project wizard form:', error);
+      toast.error(
+        'Error inesperado. Por favor intenta nuevamente.',
+        { 
+          id: 'project-wizard',
+          duration: 5000 
+        }
+      );
+    }
   };
 
   const handleBackdropClick = (e: React.MouseEvent) => {
