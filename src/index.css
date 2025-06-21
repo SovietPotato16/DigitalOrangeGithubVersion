@@ -437,3 +437,30 @@ button, a, input, textarea, select {
     @apply text-white font-semibold;
   }
 }
+
+/* Carousel Animation for Brand Logos - TRUE INFINITE LOOP */
+@keyframes infiniteCarousel {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-25%);
+  }
+}
+
+.animate-carousel {
+  animation: infiniteCarousel 30s linear infinite;
+}
+
+.animate-carousel-fast {
+  animation: infiniteCarousel 20s linear infinite;
+}
+
+/* Pause animation on hover */
+.animate-carousel:hover {
+  animation-play-state: paused;
+}
+
+.animate-carousel-fast:hover {
+  animation-play-state: paused;
+}

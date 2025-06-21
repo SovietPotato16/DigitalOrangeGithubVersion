@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Zap, CheckCircle, Star, Sparkles, Calendar, Eye, Rocket, Globe, Store, Building2, Stethoscope, Scale } from 'lucide-react';
+
+// Componente personalizado para el ícono dental usando emoji
+const ToothIcon = ({ className }: { className?: string }) => (
+  <span className={`text-2xl ${className}`}>🦷</span>
+);
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -13,6 +18,76 @@ const Home = () => {
     e.preventDefault();
     setIsWizardOpen(true);
   };
+
+  // Brands data array with reliable logos (sin URLs bloqueadas)
+  const brandsData = [
+    { 
+      name: 'Caninos Argentina', 
+      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=Caninos',
+      url: 'https://caninosargentina.com',
+      colorLogo: 'https://via.placeholder.com/160x80/FF6B35/FFFFFF?text=Caninos'
+    },
+    { 
+      name: 'Google', 
+      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=Google',
+      url: 'https://google.com',
+      colorLogo: 'https://via.placeholder.com/160x80/4285F4/FFFFFF?text=Google'
+    },
+    { 
+      name: 'Smart Clic', 
+      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=SmartClic',
+      url: 'https://smartclic.mx',
+      colorLogo: 'https://via.placeholder.com/160x80/00D4AA/FFFFFF?text=SmartClic'
+    },
+    { 
+      name: 'Inncosys', 
+      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=Inncosys',
+      url: 'https://inncosys.com',
+      colorLogo: 'https://via.placeholder.com/160x80/6366F1/FFFFFF?text=Inncosys'
+    },
+    { 
+      name: 'Meta', 
+      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=Meta',
+      url: 'https://meta.com',
+      colorLogo: 'https://via.placeholder.com/160x80/1877F2/FFFFFF?text=Meta'
+    },
+    { 
+      name: 'ChatGPT', 
+      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=ChatGPT',
+      url: 'https://chat.openai.com',
+      colorLogo: 'https://via.placeholder.com/160x80/10A37F/FFFFFF?text=ChatGPT'
+    },
+    { 
+      name: 'WooCommerce', 
+      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=WooCommerce',
+      url: 'https://woocommerce.com',
+      colorLogo: 'https://via.placeholder.com/160x80/96588A/FFFFFF?text=WooCommerce'
+    },
+    { 
+      name: 'WordPress', 
+      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=WordPress',
+      url: 'https://wordpress.com',
+      colorLogo: 'https://via.placeholder.com/160x80/21759B/FFFFFF?text=WordPress'
+    },
+    { 
+      name: 'Shopify', 
+      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=Shopify',
+      url: 'https://shopify.com',
+      colorLogo: 'https://via.placeholder.com/160x80/7AB55C/FFFFFF?text=Shopify'
+    },
+    { 
+      name: 'Odoo', 
+      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=Odoo',
+      url: 'https://odoo.com',
+      colorLogo: 'https://via.placeholder.com/160x80/714B67/FFFFFF?text=Odoo'
+    },
+    { 
+      name: 'ERPNext', 
+      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=ERPNext',
+      url: 'https://erpnext.com',
+      colorLogo: 'https://via.placeholder.com/160x80/0089FF/FFFFFF?text=ERPNext'
+    }
+  ];
 
   const services = [
     {
@@ -49,6 +124,13 @@ const Home = () => {
       description: 'Plataformas para gestión de casos, clientes y documentos legales',
       color: 'from-amber-500 to-yellow-500',
       link: '/services/orange-lic'
+    },
+    {
+      icon: ToothIcon,
+      title: 'Consultorios Dentales',
+      description: 'Sistemas especializados para clínicas dentales con gestión de citas y tratamientos',
+      color: 'from-cyan-500 to-blue-500',
+      link: '/services/orange-dr'
     }
   ];
 
@@ -65,21 +147,21 @@ const Home = () => {
       role: 'Restaurante La Cocina',
       content: 'Increíble trabajo. Mi menú digital estuvo listo en menos de 2 días y mis clientes lo aman.',
       rating: 5,
-      avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg'
+      avatar: 'https://via.placeholder.com/80x80/F97316/FFFFFF?text=MG'
     },
     {
       name: 'Carlos Ruiz',
       role: 'Fotógrafo Freelance',
       content: 'Mi portafolio quedó espectacular. La calidad y velocidad de entrega superó mis expectativas.',
       rating: 5,
-      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg'
+      avatar: 'https://via.placeholder.com/80x80/8B5CF6/FFFFFF?text=CR'
     },
     {
       name: 'Ana Silva',
       role: 'Boutique Fashion',
       content: 'La tienda online aumentó mis ventas un 300%. Excelente inversión.',
       rating: 5,
-      avatar: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg'
+      avatar: 'https://via.placeholder.com/80x80/EC4899/FFFFFF?text=AS'
     }
   ];
 
@@ -160,7 +242,7 @@ const Home = () => {
           </div>
 
           {/* Testimonial cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto pb-16">
             {testimonials.map((testimonial, index) => (
               <Card key={index} className="flex flex-col h-full p-6 bg-black/40 backdrop-blur-xl border border-white/10 hover:border-orange-500/30 transition-all hover:-translate-y-2">
                 {/* Header - Avatar and Name */}
@@ -192,10 +274,69 @@ const Home = () => {
       </section>
 
       {/* Services Section */}
-      <section className="relative py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-black mb-8">
+      <section className="relative py-20 overflow-hidden">
+        {/* Fondo con gradiente oscuro como otras secciones */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900/95 via-gray-800/90 to-gray-900/95"></div>
+        
+        {/* Blobs naranjas animados difuminados */}
+        <div className="absolute inset-0">
+          {/* Blob 1 - Grande, movimiento lento */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-orange-500/30 to-pink-500/20 rounded-full blur-3xl animate-pulse opacity-70 transform translate-x-0 translate-y-0" 
+               style={{
+                 animation: 'float1 20s ease-in-out infinite'
+               }}></div>
+          
+          {/* Blob 2 - Mediano, movimiento diagonal */}
+          <div className="absolute top-1/2 right-1/3 w-72 h-72 bg-gradient-to-br from-orange-400/25 to-red-500/15 rounded-full blur-2xl opacity-60 transform translate-x-0 translate-y-0"
+               style={{
+                 animation: 'float2 15s ease-in-out infinite 5s'
+               }}></div>
+          
+          {/* Blob 3 - Pequeño, movimiento rápido */}
+          <div className="absolute bottom-1/4 left-1/2 w-48 h-48 bg-gradient-to-br from-orange-600/35 to-yellow-500/20 rounded-full blur-xl opacity-50 transform translate-x-0 translate-y-0"
+               style={{
+                 animation: 'float3 12s ease-in-out infinite 2s'
+               }}></div>
+          
+          {/* Blob 4 - Extra difuminado para atmósfera */}
+          <div className="absolute top-3/4 right-1/4 w-80 h-80 bg-gradient-to-br from-orange-300/20 to-orange-700/10 rounded-full blur-3xl opacity-40 transform translate-x-0 translate-y-0"
+               style={{
+                 animation: 'float4 18s ease-in-out infinite 8s'
+               }}></div>
+        </div>
+
+        {/* CSS para las animaciones de los blobs */}
+        <style>{`
+          @keyframes float1 {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            25% { transform: translate(30px, -20px) scale(1.1); }
+            50% { transform: translate(-20px, 30px) scale(0.9); }
+            75% { transform: translate(20px, 20px) scale(1.05); }
+          }
+          
+          @keyframes float2 {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(-40px, 25px) scale(1.15); }
+            66% { transform: translate(35px, -30px) scale(0.85); }
+          }
+          
+          @keyframes float3 {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            20% { transform: translate(25px, 15px) scale(1.2); }
+            40% { transform: translate(-15px, -25px) scale(0.8); }
+            60% { transform: translate(30px, 10px) scale(1.1); }
+            80% { transform: translate(-20px, 20px) scale(0.9); }
+          }
+          
+          @keyframes float4 {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            50% { transform: translate(-25px, -35px) scale(1.3); }
+          }
+        `}</style>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-black mb-6">
               <span className="text-white">Nuestros</span>
               <br />
               <span className="bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-clip-text text-transparent">super poderes</span>
@@ -207,91 +348,164 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <Card key={index} className="flex flex-col h-full p-8 bg-white/5 backdrop-blur-md border border-white/10 hover:border-orange-500/30 transition-all hover:-translate-y-2 group">
-                <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg transition-transform group-hover:scale-110`}>
-                  <service.icon className="w-8 h-8 text-white" />
+              <Card 
+                key={index} 
+                className="group relative flex flex-col h-full p-8 transition-all duration-500 hover:-translate-y-2 cursor-pointer"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.03)',
+                  backdropFilter: 'blur(20px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  borderRadius: '24px',
+                  boxShadow: `
+                    0 8px 32px rgba(0, 0, 0, 0.3),
+                    0 0 0 1px rgba(255, 255, 255, 0.05),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1)
+                  `
+                }}
+                                 onMouseEnter={(e) => {
+                   // Efecto de deformación de cristal en hover
+                   e.currentTarget.style.backdropFilter = 'blur(25px) saturate(200%) contrast(120%) brightness(110%)';
+                   (e.currentTarget.style as any).webkitBackdropFilter = 'blur(25px) saturate(200%) contrast(120%) brightness(110%)';
+                   e.currentTarget.style.borderColor = 'rgba(249, 115, 22, 0.4)';
+                   e.currentTarget.style.boxShadow = `
+                     0 20px 40px rgba(249, 115, 22, 0.15),
+                     0 0 0 1px rgba(249, 115, 22, 0.2),
+                     inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                     inset 0 0 20px rgba(249, 115, 22, 0.05)
+                   `;
+                   e.currentTarget.style.transform = 'translateY(-8px) perspective(1000px) rotateX(2deg)';
+                 }}
+                 onMouseLeave={(e) => {
+                   // Restaurar efecto original
+                   e.currentTarget.style.backdropFilter = 'blur(20px) saturate(180%)';
+                   (e.currentTarget.style as any).webkitBackdropFilter = 'blur(20px) saturate(180%)';
+                   e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                   e.currentTarget.style.boxShadow = `
+                     0 8px 32px rgba(0, 0, 0, 0.3),
+                     0 0 0 1px rgba(255, 255, 255, 0.05),
+                     inset 0 1px 0 rgba(255, 255, 255, 0.1)
+                   `;
+                   e.currentTarget.style.transform = 'translateY(0px) perspective(1000px) rotateX(0deg)';
+                 }}
+              >
+                {/* Efecto de brillo en los bordes */}
+                <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                     style={{
+                       background: 'linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, transparent 50%, rgba(249, 115, 22, 0.1) 100%)',
+                       filter: 'blur(2px)'
+                     }}>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-orange-400 transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-gray-300 leading-relaxed mb-6 flex-grow">
-                  {service.description}
-                </p>
-                <Button 
-                  variant="ghost" 
-                  className="w-full mt-auto bg-white/5 hover:bg-white/10 text-white hover:text-white border border-white/10 hover:border-orange-500/30 rounded-xl group"
-                  asChild
-                >
-                  <Link to={service.link}>
-                    <span>Más información</span>
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </Button>
+                
+                {/* Reflejos de cristal */}
+                <div className="absolute top-0 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute bottom-0 left-1/3 right-1/3 h-px bg-gradient-to-r from-transparent via-orange-400/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <div className="relative z-10">
+                  <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl group-hover:shadow-orange-500/20`}>
+                    <service.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-orange-400 transition-colors duration-300">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-300 leading-relaxed mb-6 flex-grow group-hover:text-gray-200 transition-colors duration-300">
+                    {service.description}
+                  </p>
+                  <Button 
+                    variant="ghost" 
+                    className="w-full mt-auto bg-white/5 hover:bg-white/10 text-white hover:text-white border border-white/10 hover:border-orange-500/30 rounded-xl group"
+                    asChild
+                  >
+                    <Link to={service.link}>
+                      <span>Más información</span>
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </Button>
+                </div>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Brands Carousel Section */}
-      <section className="relative py-20 bg-white/5 backdrop-blur-md">
+      {/* Spacer entre superpoderes y brands */}
+      <div className="py-8"></div>
+
+      {/* Clients & Partners Carousel Section */}
+      <section className="relative py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-              Confían en nosotros
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-purple-600">
+              Nuestros Clientes y Socios
             </h2>
-            <p className="text-lg text-gray-400">
-              Empresas que han transformado su presencia digital con Digital Orange
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Empresas y organizaciones que confían en nosotros para transformar su presencia digital
             </p>
+            
+
           </div>
           
-          {/* Brands Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
-            {[
-              { name: 'TechStart', logo: '🚀' },
-              { name: 'FoodieMax', logo: '🍕' },
-              { name: 'StyleCo', logo: '👔' },
-              { name: 'HealthPro', logo: '🏥' },
-              { name: 'EduTech', logo: '📚' },
-              { name: 'GreenLife', logo: '🌱' },
-              { name: 'AutoMax', logo: '🚗' },
-              { name: 'FitZone', logo: '💪' },
-              { name: 'ArtSpace', logo: '🎨' },
-              { name: 'LegalPro', logo: '⚖️' },
-              { name: 'TravelWise', logo: '✈️' },
-              { name: 'PhotoStudio', logo: '📸' }
-            ].map((brand, index) => (
-              <div 
-                key={index}
-                className="flex flex-col items-center justify-center p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-orange-500/30 transition-all hover:scale-105 group"
-              >
-                <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">
-                  {brand.logo}
+          {/* Brands Carousel Container */}
+          <div className="relative overflow-hidden">
+            {/* Gradients for fade effect */}
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
+            
+            {/* Carousel Track - True Infinite Loop with Multiple Sets */}
+            <div className="flex animate-carousel-fast">
+              {/* Render multiple sets for seamless infinite loop */}
+              {[...Array(4)].map((_, setIndex) => (
+                <div key={setIndex} className="flex items-center gap-8 shrink-0">
+                  {brandsData.map((brand, brandIndex) => (
+                    <a
+                      key={`${setIndex}-${brandIndex}`}
+                      href={brand.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative group flex items-center justify-center p-6 bg-gray-50 rounded-2xl border border-gray-200 hover:border-purple-300 transition-all duration-500 hover:scale-110 hover:shadow-xl w-[200px] h-24 mx-4"
+                    >
+                      {/* Logo with Grayscale Filter */}
+                      <img
+                        src={brand.logo}
+                        alt={brand.name}
+                        className="h-12 w-auto object-contain transition-all duration-500 filter grayscale group-hover:grayscale-0 group-hover:scale-110"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = `https://via.placeholder.com/160x80/CCCCCC/666666?text=${brand.name.replace(/\s+/g, '+')}`;
+                        }}
+                      />
+                      
+                      {/* Brand Name for Better UX */}
+                      <span className="absolute bottom-1 left-0 right-0 text-xs text-gray-500 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        {brand.name}
+                      </span>
+                      
+                      {/* Hover Effect Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </a>
+                  ))}
                 </div>
-                <span className="text-sm font-medium text-gray-300 group-hover:text-orange-400 transition-colors">
-                  {brand.name}
-                </span>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
-          {/* Stats */}
-          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="p-6">
-              <div className="text-3xl md:text-4xl font-bold text-orange-400 mb-2">500+</div>
-              <div className="text-sm text-gray-400">Proyectos completados</div>
+          {/* Stats Section */}
+          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div className="p-6 bg-purple-50 rounded-2xl">
+              <div className="text-3xl md:text-4xl font-bold text-purple-600 mb-2">500+</div>
+              <div className="text-sm text-gray-600">Proyectos completados</div>
             </div>
-            <div className="p-6">
-              <div className="text-3xl md:text-4xl font-bold text-pink-400 mb-2">48h</div>
-              <div className="text-sm text-gray-400">Tiempo promedio</div>
+            <div className="p-6 bg-pink-50 rounded-2xl">
+              <div className="text-3xl md:text-4xl font-bold text-pink-600 mb-2">48h</div>
+              <div className="text-sm text-gray-600">Tiempo promedio</div>
             </div>
-            <div className="p-6">
-              <div className="text-3xl md:text-4xl font-bold text-purple-400 mb-2">99%</div>
-              <div className="text-sm text-gray-400">Satisfacción</div>
+            <div className="p-6 bg-indigo-50 rounded-2xl">
+              <div className="text-3xl md:text-4xl font-bold text-indigo-600 mb-2">99%</div>
+              <div className="text-sm text-gray-600">Satisfacción</div>
             </div>
-            <div className="p-6">
-              <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">24/7</div>
-              <div className="text-sm text-gray-400">Soporte</div>
+            <div className="p-6 bg-cyan-50 rounded-2xl">
+              <div className="text-3xl md:text-4xl font-bold text-cyan-600 mb-2">24/7</div>
+              <div className="text-sm text-gray-600">Soporte</div>
             </div>
           </div>
         </div>
