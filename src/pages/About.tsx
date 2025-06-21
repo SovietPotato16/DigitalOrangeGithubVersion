@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion';
 import { Users, Award, Clock, Target, Heart, Zap } from 'lucide-react';
 import { useState, lazy, Suspense, useEffect } from 'react';
-import ValueCard from '@/components/ValueCard';
-import TeamCard from '@/components/TeamCard';
 
 const ProjectWizard = lazy(() => import('@/components/ProjectWizard'));
 
@@ -37,33 +35,7 @@ const About = () => {
     }
   ];
 
-  const stats = [
-    { number: '500+', label: 'Proyectos completados' },
-    { number: '48h', label: 'Tiempo promedio de entrega' },
-    { number: '99%', label: 'Clientes satisfechos' },
-    { number: '24/7', label: 'Soporte técnico' }
-  ];
 
-  const team = [
-    {
-      name: 'Laura Martínez',
-      role: 'Directora Creativa',
-      image: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg',
-      description: 'Experta en UX/UI con más de 8 años de experiencia creando interfaces que enamoran.'
-    },
-    {
-      name: 'Carlos Rivera',
-      role: 'Lead Developer',
-      image: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg',
-      description: 'Especialista en desarrollo web moderno y optimización de rendimiento.'
-    },
-    {
-      name: 'Ana Solís',
-      role: 'Estratega Digital',
-      image: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg',
-      description: 'Enfocada en crear estrategias digitales que generan resultados medibles.'
-    }
-  ];
 
   const handleLaunchProject = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -125,28 +97,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-gray-900/50 backdrop-blur-lg border-t border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-orange-500/30 transition-all"
-              >
-                <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-gray-400 font-medium">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* Story Section */}
       <section className="py-20 bg-gray-900">
@@ -163,20 +114,17 @@ const About = () => {
                 </span>
               </h2>
               <div className="space-y-6 text-gray-400 text-lg leading-relaxed">
-                <p>
+                <p className="text-justify">
                   Digital Orange Sites nació de una simple observación: muchos negocios perdían 
                   oportunidades por no tener una presencia digital profesional, principalmente 
                   debido a los largos tiempos de desarrollo y costos elevados.
                 </p>
-                <p>
+                <p className="text-justify">
                   Decidimos cambiar eso. Desarrollamos un proceso optimizado que nos permite 
                   entregar sitios web de alta calidad en solo 48 horas, sin sacrificar 
                   funcionalidad ni diseño.
                 </p>
-                <p>
-                  Hoy, después de más de 500 proyectos exitosos, seguimos comprometidos con 
-                  nuestra misión: democratizar el acceso a soluciones digitales excepcionales.
-                </p>
+
               </div>
             </motion.div>
             <motion.div
@@ -240,50 +188,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-20 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-              Conoce al equipo
-            </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Profesionales apasionados que hacen posible cada proyecto excepcional
-            </p>
-          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-orange-500/30 transition-all group overflow-hidden"
-              >
-                <div className="relative w-full h-64 mb-6 rounded-xl overflow-hidden">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-1">{member.name}</h3>
-                <p className="text-orange-400 mb-4">{member.role}</p>
-                <p className="text-gray-400">{member.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="relative py-20 overflow-hidden">

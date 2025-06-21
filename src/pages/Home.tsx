@@ -1,15 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Zap, CheckCircle, Star, Sparkles, Calendar, Eye, Rocket, Globe, Store, Building2, Stethoscope, Scale } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { 
+  Globe, 
+  Store, 
+  Building2, 
+  Stethoscope, 
+  Scale,
+  Zap, 
+  Rocket, 
+  ArrowRight, 
+  Eye, 
+  CheckCircle, 
+  Star,
+  Sparkles,
+  Calendar
+} from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import ProjectWizard from '@/components/ProjectWizard';
 
 // Componente personalizado para el ícono dental usando emoji
 const ToothIcon = ({ className }: { className?: string }) => (
   <span className={`text-2xl ${className}`}>🦷</span>
 );
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import ProjectWizard from '@/components/ProjectWizard';
 
 const Home = () => {
   const [isWizardOpen, setIsWizardOpen] = useState(false);
@@ -19,74 +34,39 @@ const Home = () => {
     setIsWizardOpen(true);
   };
 
-  // Brands data array with reliable logos (sin URLs bloqueadas)
+  // Brands data array con logos reales desde public/images
   const brandsData = [
     { 
       name: 'Caninos Argentina', 
-      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=Caninos',
-      url: 'https://caninosargentina.com',
-      colorLogo: 'https://via.placeholder.com/160x80/FF6B35/FFFFFF?text=Caninos'
+      logo: '/images/LOGO CANINOS.png',
+      url: 'https://caninosargentina.com'
     },
     { 
       name: 'Google', 
-      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=Google',
-      url: 'https://google.com',
-      colorLogo: 'https://via.placeholder.com/160x80/4285F4/FFFFFF?text=Google'
+      logo: '/images/google_logo.png',
+      url: 'https://google.com'
     },
     { 
       name: 'Smart Clic', 
-      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=SmartClic',
+      logo: '',
       url: 'https://smartclic.mx',
-      colorLogo: 'https://via.placeholder.com/160x80/00D4AA/FFFFFF?text=SmartClic'
+      isText: true // Renderizar como texto ya que no existe el logo
     },
     { 
       name: 'Inncosys', 
-      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=Inncosys',
-      url: 'https://inncosys.com',
-      colorLogo: 'https://via.placeholder.com/160x80/6366F1/FFFFFF?text=Inncosys'
+      logo: '/images/inncosys_logo.jpg',
+      url: 'https://inncosys.com'
     },
     { 
       name: 'Meta', 
-      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=Meta',
-      url: 'https://meta.com',
-      colorLogo: 'https://via.placeholder.com/160x80/1877F2/FFFFFF?text=Meta'
+      logo: '/images/meta_logo.png',
+      url: 'https://meta.com'
     },
     { 
-      name: 'ChatGPT', 
-      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=ChatGPT',
-      url: 'https://chat.openai.com',
-      colorLogo: 'https://via.placeholder.com/160x80/10A37F/FFFFFF?text=ChatGPT'
-    },
-    { 
-      name: 'WooCommerce', 
-      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=WooCommerce',
-      url: 'https://woocommerce.com',
-      colorLogo: 'https://via.placeholder.com/160x80/96588A/FFFFFF?text=WooCommerce'
-    },
-    { 
-      name: 'WordPress', 
-      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=WordPress',
-      url: 'https://wordpress.com',
-      colorLogo: 'https://via.placeholder.com/160x80/21759B/FFFFFF?text=WordPress'
-    },
-    { 
-      name: 'Shopify', 
-      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=Shopify',
-      url: 'https://shopify.com',
-      colorLogo: 'https://via.placeholder.com/160x80/7AB55C/FFFFFF?text=Shopify'
-    },
-    { 
-      name: 'Odoo', 
-      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=Odoo',
-      url: 'https://odoo.com',
-      colorLogo: 'https://via.placeholder.com/160x80/714B67/FFFFFF?text=Odoo'
-    },
-    { 
-      name: 'ERPNext', 
-      logo: 'https://via.placeholder.com/160x80/CCCCCC/666666?text=ERPNext',
-      url: 'https://erpnext.com',
-      colorLogo: 'https://via.placeholder.com/160x80/0089FF/FFFFFF?text=ERPNext'
-    }
+      name: 'OpenAI', 
+      logo: '/images/OpenAi_Logo.png',
+      url: 'https://openai.com'
+     }
   ];
 
   const services = [
@@ -135,7 +115,7 @@ const Home = () => {
   ];
 
   const features = [
-    'Entrega garantizada en 48 horas',
+    'Tecnología de vanguardia',
     'Diseño responsive y moderno',
     'Optimización SEO incluida',
     'Soporte técnico continuo'
@@ -146,22 +126,19 @@ const Home = () => {
       name: 'María González',
       role: 'Restaurante La Cocina',
       content: 'Increíble trabajo. Mi menú digital estuvo listo en menos de 2 días y mis clientes lo aman.',
-      rating: 5,
-      avatar: 'https://via.placeholder.com/80x80/F97316/FFFFFF?text=MG'
+      rating: 5
     },
     {
       name: 'Carlos Ruiz',
       role: 'Fotógrafo Freelance',
       content: 'Mi portafolio quedó espectacular. La calidad y velocidad de entrega superó mis expectativas.',
-      rating: 5,
-      avatar: 'https://via.placeholder.com/80x80/8B5CF6/FFFFFF?text=CR'
+      rating: 5
     },
     {
       name: 'Ana Silva',
       role: 'Boutique Fashion',
-      content: 'La tienda online aumentó mis ventas un 300%. Excelente inversión.',
-      rating: 5,
-      avatar: 'https://via.placeholder.com/80x80/EC4899/FFFFFF?text=AS'
+      content: 'Nunca pensé que vender en línea sería tan lucrativo y facil antes de conocer a Digital Orange',
+      rating: 5
     }
   ];
 
@@ -181,7 +158,7 @@ const Home = () => {
           <div className="inline-block transition-transform hover:scale-105 mb-8">
             <Badge className="bg-gradient-to-r from-orange-500/20 to-pink-500/20 text-orange-300 hover:from-orange-500/30 hover:to-pink-500/30 rounded-full px-6 py-3 text-lg border border-orange-500/30 backdrop-blur-sm">
               <Zap className="w-5 h-5 mr-2" />
-              Entrega en 48 horas ⚡
+              Entregas desde 48 hrs ⚡
             </Badge>
           </div>
           
@@ -245,17 +222,10 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto pb-16">
             {testimonials.map((testimonial, index) => (
               <Card key={index} className="flex flex-col h-full p-6 bg-black/40 backdrop-blur-xl border border-white/10 hover:border-orange-500/30 transition-all hover:-translate-y-2">
-                {/* Header - Avatar and Name */}
-                <div className="flex items-center mb-6">
-                  <img 
-                    src={testimonial.avatar} 
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover mr-4 ring-2 ring-orange-500/30"
-                  />
-                  <div>
-                    <p className="font-bold text-white">{testimonial.name}</p>
-                    <p className="text-orange-400 text-sm">{testimonial.role}</p>
-                  </div>
+                {/* Header - Name and Role */}
+                <div className="mb-6 text-left">
+                  <p className="font-bold text-white text-left">{testimonial.name}</p>
+                  <p className="text-orange-400 text-sm text-left">{testimonial.role}</p>
                 </div>
                 
                 {/* Rating Stars */}
@@ -451,62 +421,70 @@ const Home = () => {
             <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
             <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
             
-            {/* Carousel Track - True Infinite Loop with Multiple Sets */}
-            <div className="flex animate-carousel-fast">
-              {/* Render multiple sets for seamless infinite loop */}
-              {[...Array(4)].map((_, setIndex) => (
-                <div key={setIndex} className="flex items-center gap-8 shrink-0">
-                  {brandsData.map((brand, brandIndex) => (
-                    <a
-                      key={`${setIndex}-${brandIndex}`}
-                      href={brand.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="relative group flex items-center justify-center p-6 bg-gray-50 rounded-2xl border border-gray-200 hover:border-purple-300 transition-all duration-500 hover:scale-110 hover:shadow-xl w-[200px] h-24 mx-4"
-                    >
-                      {/* Logo with Grayscale Filter */}
-                      <img
-                        src={brand.logo}
-                        alt={brand.name}
-                        className="h-12 w-auto object-contain transition-all duration-500 filter grayscale group-hover:grayscale-0 group-hover:scale-110"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.src = `https://via.placeholder.com/160x80/CCCCCC/666666?text=${brand.name.replace(/\s+/g, '+')}`;
-                        }}
-                      />
-                      
-                      {/* Brand Name for Better UX */}
-                      <span className="absolute bottom-1 left-0 right-0 text-xs text-gray-500 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        {brand.name}
-                      </span>
-                      
-                      {/* Hover Effect Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    </a>
-                  ))}
-                </div>
+            {/* Framer Motion Continuous Carousel */}
+            <motion.div
+              className="flex items-center gap-8"
+              animate={{
+                x: [0, -1200], // Ajustar según el ancho de elementos
+              }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 20,
+                  ease: "linear",
+                },
+              }}
+            >
+              {/* Duplicar elementos para loop infinito suave */}
+              {[...brandsData, ...brandsData, ...brandsData, ...brandsData].map((brand, index) => (
+                <a
+                  key={index}
+                  href={brand.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-center p-6 bg-gray-50 rounded-2xl border border-gray-200 hover:border-purple-300 transition-all duration-500 hover:scale-110 hover:shadow-xl w-[200px] h-24 mx-4 flex-shrink-0"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    minHeight: '96px',
+                    minWidth: '200px'
+                  }}
+                >
+                  {/* Renderizar texto azul centrado para SmartClic o imagen para otros */}
+                  {brand.isText ? (
+                    <div className="text-blue-600 font-bold text-xl text-center transition-all duration-500 group-hover:text-blue-700 group-hover:scale-110">
+                      SmartClic
+                    </div>
+                  ) : (
+                    <img
+                      src={brand.logo}
+                      alt={brand.name}
+                      className="max-h-12 max-w-[160px] w-auto h-auto object-contain transition-all duration-500 group-hover:scale-110"
+                      style={{
+                        maxHeight: '48px',
+                        maxWidth: '160px',
+                        objectFit: 'contain',
+                        objectPosition: 'center'
+                      }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = `https://via.placeholder.com/160x48/CCCCCC/666666?text=${brand.name.replace(/\s+/g, '+')}`;
+                      }}
+                    />
+                  )}
+                  
+                  {/* Brand Name for Better UX */}
+                  <span className="absolute bottom-1 left-0 right-0 text-xs text-gray-500 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {brand.name}
+                  </span>
+                  
+                  {/* Hover Effect Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </a>
               ))}
-            </div>
-          </div>
-
-          {/* Stats Section */}
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="p-6 bg-purple-50 rounded-2xl">
-              <div className="text-3xl md:text-4xl font-bold text-purple-600 mb-2">500+</div>
-              <div className="text-sm text-gray-600">Proyectos completados</div>
-            </div>
-            <div className="p-6 bg-pink-50 rounded-2xl">
-              <div className="text-3xl md:text-4xl font-bold text-pink-600 mb-2">48h</div>
-              <div className="text-sm text-gray-600">Tiempo promedio</div>
-            </div>
-            <div className="p-6 bg-indigo-50 rounded-2xl">
-              <div className="text-3xl md:text-4xl font-bold text-indigo-600 mb-2">99%</div>
-              <div className="text-sm text-gray-600">Satisfacción</div>
-            </div>
-            <div className="p-6 bg-cyan-50 rounded-2xl">
-              <div className="text-3xl md:text-4xl font-bold text-cyan-600 mb-2">24/7</div>
-              <div className="text-sm text-gray-600">Soporte</div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

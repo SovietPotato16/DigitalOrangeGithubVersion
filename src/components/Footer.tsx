@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div className="space-y-4 text-left">
             <Link to="/" className="text-2xl font-bold block flex items-center gap-2">
@@ -61,45 +61,15 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Services */}
-          <div className="text-left">
-            <h3 className="text-white font-semibold mb-4">Servicios</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/services/web" className="text-gray-400 hover:text-orange-500 transition-colors">
-                  Desarrollo Web
-                </Link>
-              </li>
-              <li>
-                <Link to="/services/mobile" className="text-gray-400 hover:text-orange-500 transition-colors">
-                  Apps Móviles
-                </Link>
-              </li>
-              <li>
-                <Link to="/services/design" className="text-gray-400 hover:text-orange-500 transition-colors">
-                  Diseño UI/UX
-                </Link>
-              </li>
-              <li>
-                <Link to="/services/marketing" className="text-gray-400 hover:text-orange-500 transition-colors">
-                  Marketing Digital
-                </Link>
-              </li>
-            </ul>
-          </div>
-
           {/* Contact */}
           <div className="text-left">
             <h3 className="text-white font-semibold mb-4">Contacto</h3>
             <ul className="space-y-2">
               <li className="text-gray-400">
-                Email: info@orangedigital.com
+                Email: hola@digitalorange.com.mx
               </li>
               <li className="text-gray-400">
-                Tel: +52 (123) 456-7890
-              </li>
-              <li className="text-gray-400">
-                Dirección: Ciudad de México, México
+                Tel: +52 722 177 2135
               </li>
             </ul>
           </div>

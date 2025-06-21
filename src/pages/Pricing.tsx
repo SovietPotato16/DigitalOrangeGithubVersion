@@ -6,7 +6,17 @@ import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import ContactModal from '@/components/ContactModal';
 import React from 'react';
+
+// Interface para la información del plan
+interface PlanInfo {
+  planName: string;
+  planCategory: string;
+  planPrice: number;
+  billingType: 'monthly' | 'annual';
+  ctaText: string;
+}
 
 const formatPrice = (price: number): string => {
   return new Intl.NumberFormat('es-MX', {
@@ -81,6 +91,27 @@ function AnimatedBlobsBackground() {
 
 const Pricing = () => {
   const [isAnnual, setIsAnnual] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<PlanInfo | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Función para abrir el modal con información del plan
+  const handlePlanSelection = (plan: any, category: string) => {
+    const planInfo: PlanInfo = {
+      planName: plan.name,
+      planCategory: category,
+      planPrice: isAnnual ? calculateAnnualPrice(plan.price) : plan.price,
+      billingType: isAnnual ? 'annual' : 'monthly',
+      ctaText: plan.cta
+    };
+    setSelectedPlan(planInfo);
+    setIsModalOpen(true);
+  };
+
+  // Función para cerrar el modal
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedPlan(null);
+  };
 
   const getDiscountedPrice = (price: number) => {
     // Calculamos el precio con 50% de descuento
@@ -410,7 +441,7 @@ const Pricing = () => {
     }
   ];
 
-  const renderPricingCards = (plans: any[]) => (
+  const renderPricingCards = (plans: any[], category: string) => (
     <div className={`grid grid-cols-1 md:grid-cols-${plans.length === 2 ? '2' : '3'} gap-8 mx-auto ${
       plans.length === 2 ? 'max-w-[800px]' : 'max-w-[1200px]'
     } px-4 sm:px-6 lg:px-8`}>
@@ -470,6 +501,7 @@ const Pricing = () => {
                   </ul>
 
           <button
+            onClick={() => handlePlanSelection(plan, category)}
             className={`w-full py-3 px-6 rounded-xl font-medium transition-all mt-auto ${
                       plan.popular
                 ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:shadow-lg hover:shadow-orange-500/25'
@@ -552,32 +584,33 @@ const Pricing = () => {
 
           <div className="mt-16">
             <TabsContent value="websites" className="mt-0">
-              {renderPricingCards(websitePlans)}
+              {renderPricingCards(websitePlans, 'Sitios Web')}
             </TabsContent>
             <TabsContent value="ecommerce" className="mt-0">
-              {renderPricingCards(ecommercePlans)}
+              {renderPricingCards(ecommercePlans, 'E-commerce')}
             </TabsContent>
             <TabsContent value="smallbusiness" className="mt-0">
-              {renderPricingCards(smallBusinessPlans)}
+              {renderPricingCards(smallBusinessPlans, 'Pequeños Negocios')}
             </TabsContent>
             <TabsContent value="enterprise" className="mt-0">
-              {renderPricingCards(enterpriseSystems)}
+              {renderPricingCards(enterpriseSystems, 'Empresarial')}
             </TabsContent>
             <TabsContent value="professional" className="mt-0">
-              {renderPricingCards(professionalServices)}
+              {renderPricingCards(professionalServices, 'Profesionistas')}
             </TabsContent>
             <TabsContent value="specialized" className="mt-0">
-              <div className="text-center max-w-3xl mx-auto mb-16 p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-orange-500/30 transition-all hover:shadow-[0_8px_30px_rgb(255,107,53,0.1)]">
+              {renderPricingCards(specializedServices, 'Servicios Especiales')}
+              <div className="text-center max-w-3xl mx-auto mt-16 p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-orange-500/30 transition-all hover:shadow-[0_8px_30px_rgb(255,107,53,0.1)]">
                 <h3 className="text-2xl font-bold text-white mb-4">¿Necesitas algo diferente?</h3>
                 <p className="text-gray-400 mb-8">
                   ¿No encuentras el producto que necesitas? Nuestro equipo de expertos puede crear una solución personalizada para tu negocio.
                 </p>
-                <Link
-                  to="/contact"
+                <button
+                  onClick={() => handlePlanSelection({ name: 'Solución Personalizada', cta: 'Contactar expertos', price: 0 }, 'Servicios Personalizados')}
                   className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:shadow-lg hover:shadow-orange-500/25 transition-all"
                 >
                   Contacta a nuestros expertos
-                </Link>
+                </button>
             </div>
             </TabsContent>
           </div>
@@ -586,13 +619,13 @@ const Pricing = () => {
         {/* Guide Button */}
         <div className="flex justify-center mt-8 mb-12">
           <button
-            onClick={() => window.location.href = '/guide'}
+            onClick={() => handlePlanSelection({ name: 'Asesoría Personalizada', cta: 'Solicitar guía', price: 0 }, 'Consultoría')}
             className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-white transition-all hover:shadow-[0_0_20px_rgba(255,107,53,0.3)] hover:-translate-y-0.5"
           >
             <HelpCircle className="w-6 h-6" />
             <span className="text-lg font-medium">¿No sabes cuál elegir?</span>
             <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 transform rounded-md bg-black px-3 py-1 text-sm text-white opacity-0 transition-opacity group-hover:opacity-100">
-              Toma nuestra guía
+              Solicitar asesoría
               </span>
           </button>
         </div>
@@ -603,8 +636,8 @@ const Pricing = () => {
           <p className="text-gray-400 mb-4">
             Nuestro equipo está aquí para ayudarte a elegir el plan perfecto para tu negocio.
             </p>
-          <Link
-            to="/contact"
+          <button
+            onClick={() => handlePlanSelection({ name: 'Consulta General', cta: 'Contactar', price: 0 }, 'Consulta')}
             className="inline-flex items-center text-orange-500 hover:text-orange-400 transition-colors"
               >
             Contáctanos
@@ -622,9 +655,16 @@ const Pricing = () => {
                 d="M17 8l4 4m0 0l-4 4m4-4H3"
               />
             </svg>
-          </Link>
+          </button>
         </div>
       </div>
+
+      {/* Modal de contacto */}
+      <ContactModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        planInfo={selectedPlan}
+      />
     </div>
   );
 };
