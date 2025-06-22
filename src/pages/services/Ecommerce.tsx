@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Store, CreditCard, Package, Truck, BarChart, Users, Shield, Zap, Search, Settings, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 const Ecommerce = () => {
   const features = [
@@ -306,6 +307,9 @@ const Ecommerce = () => {
           </motion.div>
         </div>
       </section>
+      
+      {/* Botón flotante de WhatsApp */}
+      <WhatsAppButton />
     </div>
   );
 };

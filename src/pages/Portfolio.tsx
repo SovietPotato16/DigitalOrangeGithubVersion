@@ -3,6 +3,10 @@ import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Globe, Store, Building2, Stethoscope, Scale, HeartPulse } from 'lucide-react';
+import { ExternalLink, Github, ArrowRight, Calendar, Users, Sparkles } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 // Define the project type
 interface Project {
@@ -214,6 +218,9 @@ const Portfolio: React.FC = () => {
           </motion.div>
         </div>
       </section>
+      
+      {/* Botón flotante de WhatsApp */}
+      <WhatsAppButton />
     </div>
   );
 };

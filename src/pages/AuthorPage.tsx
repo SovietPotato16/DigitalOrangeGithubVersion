@@ -5,6 +5,7 @@ import BlogCard from '@/components/blog/BlogCard';
 import postsData from '@/data/posts.json';
 import authorsData from '@/data/authors.json';
 import { slugify } from '@/lib/utils';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 const AuthorPage = () => {
   const { authorId } = useParams<{ authorId: string }>();
@@ -97,6 +98,9 @@ const AuthorPage = () => {
           </div>
         )}
       </div>
+      
+      {/* Botón flotante de WhatsApp */}
+      <WhatsAppButton />
     </div>
   );
 };

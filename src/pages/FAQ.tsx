@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 interface FAQItem {
   question: string;
@@ -99,6 +100,9 @@ const FAQ = () => {
           ))}
         </div>
       </div>
+      
+      {/* Botón flotante de WhatsApp */}
+      <WhatsAppButton />
     </div>
   );
 };

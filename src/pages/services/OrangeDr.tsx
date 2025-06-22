@@ -4,6 +4,7 @@ import { Stethoscope, Calendar, FileText, Users, Shield, CreditCard, BarChart, S
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import ComingSoonBanner from '@/components/ComingSoonBanner';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 const OrangeDr = () => {
   const features = [
@@ -309,6 +310,9 @@ const OrangeDr = () => {
           </motion.div>
         </div>
       </section>
+      
+      {/* Botón flotante de WhatsApp */}
+      <WhatsAppButton />
     </div>
   );
 };

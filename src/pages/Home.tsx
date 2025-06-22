@@ -20,6 +20,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import ProjectWizard from '@/components/ProjectWizard';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 // Componente personalizado para el ícono dental usando emoji
 const ToothIcon = ({ className }: { className?: string }) => (
@@ -526,6 +527,9 @@ const Home = () => {
         isOpen={isWizardOpen} 
         onClose={() => setIsWizardOpen(false)} 
       />
+      
+      {/* Botón flotante de WhatsApp */}
+      <WhatsAppButton />
     </main>
   );
 };

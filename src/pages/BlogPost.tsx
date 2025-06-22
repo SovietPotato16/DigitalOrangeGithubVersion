@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import postsData from '@/data/posts.json';
 import { slugify } from '@/lib/utils';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 type Post = (typeof postsData.posts)[number];
 
@@ -155,6 +156,9 @@ const BlogPost = () => {
           </div>
         </motion.div>
       </div>
+      
+      {/* Botón flotante de WhatsApp */}
+      <WhatsAppButton />
     </div>
   );
 };

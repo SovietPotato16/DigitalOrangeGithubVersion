@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Users, Award, Clock, Target, Heart, Zap } from 'lucide-react';
 import { useState, lazy, Suspense, useEffect } from 'react';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 const ProjectWizard = lazy(() => import('@/components/ProjectWizard'));
 
@@ -255,6 +256,9 @@ const About = () => {
           onClose={() => setIsWizardOpen(false)} 
         />
       </Suspense>
+      
+      {/* Botón flotante de WhatsApp */}
+      <WhatsAppButton />
     </div>
   );
 };

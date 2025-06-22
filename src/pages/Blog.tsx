@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Search } from 'lucide-react';
 import BlogCard from '@/components/blog/BlogCard';
 import postsData from '@/data/posts.json';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 // Definimos el tipo de Post basándonos en la estructura del JSON
 type Post = (typeof postsData.posts)[number];
@@ -185,6 +186,9 @@ const Blog = () => {
           </>
         )}
       </div>
+      
+      {/* Botón flotante de WhatsApp */}
+      <WhatsAppButton />
     </div>
   );
 };

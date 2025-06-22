@@ -69,7 +69,7 @@ const Footer = () => {
                 Email: hola@digitalorange.com.mx
               </li>
               <li className="text-gray-400">
-                Tel: +52 722 177 2135
+                Tel: +52 1 722 177 2135
               </li>
             </ul>
           </div>

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Globe, Code, Smartphone, Shield, Search, BarChart, Zap, Palette, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 const WebSites = () => {
   const features = [
@@ -306,6 +307,9 @@ const WebSites = () => {
           </motion.div>
         </div>
       </section>
+      
+      {/* Botón flotante de WhatsApp */}
+      <WhatsAppButton />
     </div>
   );
 };

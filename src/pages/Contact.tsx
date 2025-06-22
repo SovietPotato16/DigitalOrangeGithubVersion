@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/hooks/use-toast';
 import { submitContactForm } from '@/services/emailService';
 import { toast } from 'react-hot-toast';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -32,7 +33,7 @@ const Contact = () => {
     {
       icon: Phone,
       title: 'Teléfono',
-      value: '+1 (555) 123-4567',
+      value: '+52 1 722 177 2135',
       description: 'Lunes a Viernes 9AM - 7PM'
     },
     {
@@ -275,10 +276,10 @@ const Contact = () => {
                 Disponibles de Lunes a Viernes de 9:00 a 18:00
               </p>
               <a
-                href="tel:+525512345678"
+                href="tel:+5217221772135"
                 className="text-orange-400 hover:text-orange-500 transition-colors font-medium"
               >
-                +52 (55) 1234-5678
+                +52 1 722 177 2135
               </a>
             </motion.div>
 
@@ -323,6 +324,9 @@ const Contact = () => {
           </div>
         </div>
       </div>
+      
+      {/* Botón flotante de WhatsApp */}
+      <WhatsAppButton />
     </div>
   );
 };

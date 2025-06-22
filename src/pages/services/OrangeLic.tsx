@@ -4,6 +4,7 @@ import { Scale, FileText, Users, Shield, Calendar, BarChart, Settings, MessageSq
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import ComingSoonBanner from '@/components/ComingSoonBanner';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 const OrangeLic = () => {
   const features = [
@@ -309,6 +310,9 @@ const OrangeLic = () => {
           </motion.div>
         </div>
       </section>
+      
+      {/* Botón flotante de WhatsApp */}
+      <WhatsAppButton />
     </div>
   );
 };
