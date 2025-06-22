@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
-import { Globe, Store, Building2, Stethoscope, Scale, HeartPulse } from 'lucide-react';
+import { Globe, Store, Building2, Stethoscope, Scale, HeartPulse, Menu } from 'lucide-react';
 import { ExternalLink, Github, ArrowRight, Calendar, Users, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -17,6 +17,7 @@ interface Project {
   image: string;
   technologies: string[];
   icon: React.ElementType;
+  link?: string;
 }
 
 const Portfolio: React.FC = () => {
@@ -78,6 +79,16 @@ const Portfolio: React.FC = () => {
       image: "https://images.pexels.com/photos/3845811/pexels-photo-3845811.jpeg",
       technologies: ["React", "Node.js", "MongoDB"],
       icon: HeartPulse
+    },
+    {
+      id: 7,
+      title: "Menú Digital El Chipil",
+      description: "Sitio de comida mexicana gourmet y menú interactivo optimizado para dispositivos móviles.",
+      category: "Sitios Web",
+      image: "https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg",
+      technologies: ["React", "Vite", "Tailwind CSS", "PWA"],
+      icon: Menu,
+      link: "https://elchipil.digitalorange.com.mx"
     }
   ];
 
@@ -201,6 +212,17 @@ const Portfolio: React.FC = () => {
                     </div>
                     <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
                     <p className="text-gray-400 mb-4">{project.description}</p>
+                    {project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-orange-400 hover:underline mb-2"
+                      >
+                        Ver sitio
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    )}
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech) => (
                         <Badge
