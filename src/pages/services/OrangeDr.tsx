@@ -263,14 +263,13 @@ const OrangeDr = () => {
                 transition={{ delay: index * 0.1 }}
                 className="relative"
               >
-                <div className="relative rounded-2xl overflow-hidden aspect-video mb-6">
+                <div className="relative rounded-2xl overflow-hidden aspect-video mb-6 bg-white flex items-center justify-center p-8">
                   <img 
                     src={step.image} 
                     alt={step.title}
-                    className="w-full h-full object-cover"
+                    className="w-32 h-32 object-contain"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  <div className="absolute top-4 left-4 text-4xl font-bold text-red-400">
+                  <div className="absolute top-4 left-4 text-3xl font-bold text-red-400 bg-white/90 rounded-lg px-2 py-1">
                     0{index + 1}
                   </div>
                 </div>

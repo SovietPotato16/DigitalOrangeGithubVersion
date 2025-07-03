@@ -11,7 +11,7 @@ const WebSites = () => {
       icon: <Globe className="h-6 w-6" />,
       title: 'Desarrollo Moderno',
       description: 'Creamos sitios web utilizando las últimas tecnologías y frameworks para garantizar un rendimiento óptimo y una experiencia de usuario excepcional.',
-      image: '/images/services/web-development.jpg',
+      image: '/images/Sites/website/DesarolloModerno.png',
       benefits: [
         'Tecnologías de vanguardia',
         'Código limpio y mantenible',
@@ -23,7 +23,7 @@ const WebSites = () => {
       icon: <Smartphone className="h-6 w-6" />,
       title: 'Diseño Responsivo',
       description: 'Diseños que se adaptan perfectamente a cualquier dispositivo, desde smartphones hasta pantallas de escritorio, asegurando una experiencia consistente.',
-      image: '/images/services/responsive-design.jpg',
+      image: '/images/Sites/website/DisenioResponsivo.jpg',
       benefits: [
         'Adaptable a todos los dispositivos',
         'Experiencia móvil optimizada',
@@ -35,7 +35,7 @@ const WebSites = () => {
       icon: <Zap className="h-6 w-6" />,
       title: 'Rendimiento Optimizado',
       description: 'Optimizamos cada aspecto de tu sitio web para garantizar tiempos de carga ultrarrápidos y una experiencia fluida para tus usuarios.',
-      image: '/images/services/performance.jpg',
+      image: '/images/Sites/website/Rendimiento.jpg',
       benefits: [
         'Carga ultrarrápida',
         'Optimización de recursos',
@@ -47,7 +47,7 @@ const WebSites = () => {
       icon: <Shield className="h-6 w-6" />,
       title: 'Seguridad Avanzada',
       description: 'Implementamos las mejores prácticas de seguridad para proteger tu sitio web y los datos de tus usuarios contra amenazas cibernéticas.',
-      image: '/images/services/security.jpg',
+      image: '/images/Sites/website/SeguridadAvanzada.png',
       benefits: [
         'SSL/TLS',
         'Protección contra ataques',
@@ -59,7 +59,7 @@ const WebSites = () => {
       icon: <Search className="h-6 w-6" />,
       title: 'SEO Integrado',
       description: 'Optimizamos tu sitio web para los motores de búsqueda, aumentando tu visibilidad y atrayendo más tráfico orgánico.',
-      image: '/images/services/seo.jpg',
+      image: '/images/Sites/website/SEO.png',
       benefits: [
         'Optimización on-page',
         'Estructura SEO-friendly',
@@ -71,7 +71,7 @@ const WebSites = () => {
       icon: <BarChart className="h-6 w-6" />,
       title: 'Analíticas Web',
       description: 'Integramos herramientas de análisis para que puedas entender el comportamiento de tus usuarios y tomar decisiones basadas en datos.',
-      image: '/images/services/analytics.jpg',
+      image: '/images/Sites/website/EstadisticasYReportes.png',
       benefits: [
         'Google Analytics',
         'Reportes personalizados',
@@ -218,13 +218,12 @@ const WebSites = () => {
                   </ul>
                 </div>
                 <div className="flex-1">
-                  <div className="relative rounded-2xl overflow-hidden aspect-video">
+                  <div className="relative rounded-2xl overflow-hidden aspect-video bg-white p-4">
                     <img 
                       src={feature.image} 
                       alt={feature.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   </div>
                 </div>
               </motion.div>
@@ -260,14 +259,13 @@ const WebSites = () => {
                 transition={{ delay: index * 0.1 }}
                 className="relative"
               >
-                <div className="relative rounded-2xl overflow-hidden aspect-video mb-6">
+                <div className="relative rounded-2xl overflow-hidden aspect-video mb-6 bg-white flex items-center justify-center p-8">
                   <img 
                     src={step.image} 
                     alt={step.title}
-                    className="w-full h-full object-cover"
+                    className="w-32 h-32 object-contain"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  <div className="absolute top-4 left-4 text-4xl font-bold text-blue-400">
+                  <div className="absolute top-4 left-4 text-3xl font-bold text-blue-400 bg-white/90 rounded-lg px-2 py-1">
                     0{index + 1}
                   </div>
                 </div>

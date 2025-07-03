@@ -11,7 +11,7 @@ const Ecommerce = () => {
       icon: <CreditCard className="h-6 w-6" />,
       title: 'Sistema de Pagos',
       description: 'Integración con múltiples pasarelas de pago, procesamiento seguro de transacciones, y soporte para diversos métodos de pago incluyendo tarjetas, transferencias y pagos móviles.',
-      image: '/images/services/payment-system.jpg',
+      image: '/images/Sites/eccomerce/SistemaDePagos.png',
       benefits: [
         'Múltiples pasarelas de pago',
         'Procesamiento seguro',
@@ -23,7 +23,7 @@ const Ecommerce = () => {
       icon: <Package className="h-6 w-6" />,
       title: 'Gestión de Inventario',
       description: 'Control automático de stock, alertas de inventario bajo, gestión de variantes, y sincronización en tiempo real con múltiples ubicaciones y proveedores.',
-      image: '/images/services/inventory-management.jpg',
+      image: '/images/Sites/eccomerce/GestionInventario.png',
       benefits: [
         'Control de stock en tiempo real',
         'Alertas automáticas',
@@ -35,7 +35,7 @@ const Ecommerce = () => {
       icon: <Truck className="h-6 w-6" />,
       title: 'Envíos Automatizados',
       description: 'Integración con transportistas líderes, cálculo automático de costos de envío, seguimiento de paquetes en tiempo real, y gestión de devoluciones simplificada.',
-      image: '/images/services/shipping.jpg',
+      image: '/images/Sites/eccomerce/enviosautomaticos.webp',
       benefits: [
         'Integración con transportistas',
         'Cálculo automático de costos',
@@ -47,7 +47,7 @@ const Ecommerce = () => {
       icon: <BarChart className="h-6 w-6" />,
       title: 'Analíticas Avanzadas',
       description: 'Dashboard con métricas clave, reportes detallados de ventas, análisis de comportamiento del cliente, y herramientas de predicción de demanda.',
-      image: '/images/services/analytics.jpg',
+      image: '/images/Sites/eccomerce/AnaliticasAvanzadas.png',
       benefits: [
         'Dashboard personalizado',
         'Reportes detallados',
@@ -59,7 +59,7 @@ const Ecommerce = () => {
       icon: <Users className="h-6 w-6" />,
       title: 'Gestión de Clientes',
       description: 'Sistema de fidelización, historial de compras, segmentación de clientes, y herramientas de marketing personalizado para aumentar las ventas.',
-      image: '/images/services/customer-management.jpg',
+      image: '/images/Sites/eccomerce/GestionClientes.png',
       benefits: [
         'Programa de fidelización',
         'Historial de compras',
@@ -71,7 +71,7 @@ const Ecommerce = () => {
       icon: <Shield className="h-6 w-6" />,
       title: 'Seguridad y Cumplimiento',
       description: 'Protección de datos, cumplimiento PCI DSS, autenticación de dos factores, y monitoreo de seguridad en tiempo real.',
-      image: '/images/services/security.jpg',
+      image: '/images/Sites/eccomerce/SeguridadYcumplimiento.png',
       benefits: [
         'Cumplimiento PCI DSS',
         'Autenticación 2FA',
@@ -218,13 +218,12 @@ const Ecommerce = () => {
                   </ul>
                 </div>
                 <div className="flex-1">
-                  <div className="relative rounded-2xl overflow-hidden aspect-video">
+                  <div className="relative rounded-2xl overflow-hidden aspect-video bg-white p-4">
                     <img 
                       src={feature.image} 
                       alt={feature.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   </div>
                 </div>
               </motion.div>
@@ -260,14 +259,13 @@ const Ecommerce = () => {
                 transition={{ delay: index * 0.1 }}
                 className="relative"
               >
-                <div className="relative rounded-2xl overflow-hidden aspect-video mb-6">
+                <div className="relative rounded-2xl overflow-hidden aspect-video mb-6 bg-white flex items-center justify-center p-8">
                   <img 
                     src={step.image} 
                     alt={step.title}
-                    className="w-full h-full object-cover"
+                    className="w-32 h-32 object-contain"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  <div className="absolute top-4 left-4 text-4xl font-bold text-green-400">
+                  <div className="absolute top-4 left-4 text-3xl font-bold text-green-400 bg-white/90 rounded-lg px-2 py-1">
                     0{index + 1}
                   </div>
                 </div>

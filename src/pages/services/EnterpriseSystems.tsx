@@ -11,7 +11,7 @@ const EnterpriseSystems = () => {
       icon: <Zap className="h-6 w-6" />,
       title: 'Automatización de Procesos',
       description: 'Automatizamos tus flujos de trabajo, integramos sistemas y optimizamos procesos operativos para aumentar la eficiencia y reducir errores.',
-      image: '/images/services/automation.jpg',
+      image: '/images/Sites/SistemasEmpresariales/AutomatizaciondeProcesos.png',
       benefits: [
         'Automatización de tareas',
         'Integración de sistemas',
@@ -23,7 +23,7 @@ const EnterpriseSystems = () => {
       icon: <Database className="h-6 w-6" />,
       title: 'Gestión de Datos',
       description: 'Sistemas seguros de almacenamiento, análisis de datos en tiempo real y herramientas de inteligencia empresarial para la toma de decisiones.',
-      image: '/images/services/data-management.jpg',
+      image: '/images/Sites/SistemasEmpresariales/Gestiondedatos.png',
       benefits: [
         'Almacenamiento seguro',
         'Análisis en tiempo real',
@@ -35,7 +35,7 @@ const EnterpriseSystems = () => {
       icon: <Shield className="h-6 w-6" />,
       title: 'Seguridad Empresarial',
       description: 'Protección de datos sensibles, control de acceso granular, auditorías de seguridad y cumplimiento con regulaciones de la industria.',
-      image: '/images/services/enterprise-security.jpg',
+      image: '/images/Sites/SistemasEmpresariales/SeguridadEmpresarial.png',
       benefits: [
         'Protección de datos',
         'Control de acceso',
@@ -47,7 +47,7 @@ const EnterpriseSystems = () => {
       icon: <BarChart className="h-6 w-6" />,
       title: 'Analíticas y Reportes',
       description: 'Dashboards personalizados, reportes automatizados, KPIs en tiempo real y herramientas de análisis predictivo para el crecimiento empresarial.',
-      image: '/images/services/analytics.jpg',
+      image: '/images/Sites/SistemasEmpresariales/EstadisticasYReportes.png',
       benefits: [
         'Dashboards personalizados',
         'Reportes automatizados',
@@ -59,7 +59,7 @@ const EnterpriseSystems = () => {
       icon: <Settings className="h-6 w-6" />,
       title: 'Personalización',
       description: 'Sistemas adaptables a tus necesidades específicas, interfaces personalizables y configuración flexible de módulos y funcionalidades.',
-      image: '/images/services/customization.jpg',
+      image: '/images/Sites/SistemasEmpresariales/Perzonalizacion.png',
       benefits: [
         'Adaptación a necesidades',
         'Interfaces personalizables',
@@ -71,7 +71,7 @@ const EnterpriseSystems = () => {
       icon: <Server className="h-6 w-6" />,
       title: 'Rendimiento y Escalabilidad',
       description: 'Arquitectura de alto rendimiento, escalabilidad horizontal y optimización de recursos para manejar el crecimiento de tu negocio.',
-      image: '/images/services/performance.jpg',
+      image: '/images/Sites/SistemasEmpresariales/RendimientoYEscalabilidad.png',
       benefits: [
         'Alto rendimiento',
         'Escalabilidad horizontal',
@@ -218,13 +218,12 @@ const EnterpriseSystems = () => {
                   </ul>
                 </div>
                 <div className="flex-1">
-                  <div className="relative rounded-2xl overflow-hidden aspect-video">
+                  <div className="relative rounded-2xl overflow-hidden aspect-video bg-white p-4">
                     <img 
                       src={feature.image} 
                       alt={feature.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   </div>
                 </div>
               </motion.div>
@@ -260,14 +259,13 @@ const EnterpriseSystems = () => {
                 transition={{ delay: index * 0.1 }}
                 className="relative"
               >
-                <div className="relative rounded-2xl overflow-hidden aspect-video mb-6">
+                <div className="relative rounded-2xl overflow-hidden aspect-video mb-6 bg-white flex items-center justify-center p-8">
                   <img 
                     src={step.image} 
                     alt={step.title}
-                    className="w-full h-full object-cover"
+                    className="w-32 h-32 object-contain"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  <div className="absolute top-4 left-4 text-4xl font-bold text-purple-400">
+                  <div className="absolute top-4 left-4 text-3xl font-bold text-purple-400 bg-white/90 rounded-lg px-2 py-1">
                     0{index + 1}
                   </div>
                 </div>
