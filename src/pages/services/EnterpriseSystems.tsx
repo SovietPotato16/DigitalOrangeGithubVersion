@@ -85,22 +85,22 @@ const EnterpriseSystems = () => {
     {
       title: 'Descubrimiento',
       description: 'Analizamos tus procesos actuales, identificamos áreas de mejora y definimos objetivos claros para la implementación del sistema.',
-      image: '/images/services/discovery-process.jpg'
+      image: '/images/Sites/Discovery.svg'
     },
     {
       title: 'Diseño',
       description: 'Creamos una arquitectura personalizada que se adapta a tus necesidades específicas y procesos de negocio.',
-      image: '/images/services/design-process.jpg'
+      image: '/images/Sites/design.svg'
     },
     {
       title: 'Implementación',
       description: 'Desarrollamos e implementamos el sistema con integraciones, automatizaciones y funcionalidades personalizadas.',
-      image: '/images/services/implementation-process.jpg'
+      image: '/images/Sites/Implementacion.svg'
     },
     {
       title: 'Optimización',
       description: 'Realizamos pruebas exhaustivas, capacitación del equipo y ajustes finales para asegurar el éxito del sistema.',
-      image: '/images/services/optimization-process.jpg'
+      image: '/images/Sites/Optimizacion.svg'
     }
   ];
 

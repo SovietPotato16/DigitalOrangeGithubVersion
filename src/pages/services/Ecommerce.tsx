@@ -85,22 +85,22 @@ const Ecommerce = () => {
     {
       title: 'Descubrimiento',
       description: 'Analizamos tu modelo de negocio, productos y objetivos. Entendemos tus necesidades específicas para crear una estrategia de e-commerce personalizada.',
-      image: '/images/services/discovery-process.jpg'
+      image: '/images/Sites/Discovery.svg'
     },
     {
       title: 'Configuración',
       description: 'Implementamos la plataforma con tus productos, categorías y configuraciones específicas, asegurando una experiencia de compra óptima.',
-      image: '/images/services/setup-process.jpg'
+      image: '/images/Sites/design.svg'
     },
     {
       title: 'Integración',
       description: 'Conectamos todos los sistemas necesarios: pagos, envíos, inventario y marketing para una operación fluida.',
-      image: '/images/services/integration-process.jpg'
+      image: '/images/Sites/Implementacion.svg'
     },
     {
       title: 'Lanzamiento',
       description: 'Realizamos pruebas exhaustivas y capacitación antes de lanzar tu tienda online al mercado.',
-      image: '/images/services/launch-process.jpg'
+      image: '/images/Sites/Optimizacion.svg'
     }
   ];
 

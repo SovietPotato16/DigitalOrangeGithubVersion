@@ -86,22 +86,22 @@ const OrangeLic = () => {
     {
       title: 'Descubrimiento',
       description: 'Analizamos tus necesidades específicas, flujos de trabajo actuales y objetivos para personalizar la solución.',
-      image: '/images/services/discovery-process.jpg'
+      image: '/images/Sites/Discovery.svg'
     },
     {
       title: 'Configuración',
       description: 'Implementamos el sistema adaptado a tu bufete, configurando módulos y funcionalidades según tus necesidades.',
-      image: '/images/services/setup-process.jpg'
+      image: '/images/Sites/design.svg'
     },
     {
       title: 'Capacitación',
       description: 'Entrenamos a tu equipo en el uso del sistema, asegurando una transición suave y efectiva.',
-      image: '/images/services/training-process.jpg'
+      image: '/images/Sites/Implementacion.svg'
     },
     {
       title: 'Soporte Continuo',
       description: 'Brindamos soporte técnico permanente y actualizaciones para mantener tu sistema funcionando óptimamente.',
-      image: '/images/services/support-process.jpg'
+      image: '/images/Sites/Optimizacion.svg'
     }
   ];
 

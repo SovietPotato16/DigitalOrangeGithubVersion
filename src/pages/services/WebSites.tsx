@@ -85,22 +85,22 @@ const WebSites = () => {
     {
       title: 'Descubrimiento',
       description: 'Nos reunimos contigo para entender tu negocio, objetivos y visión. Analizamos tu mercado, competencia y necesidades específicas para crear una estrategia digital personalizada.',
-      image: '/images/services/discovery-process.jpg'
+      image: '/images/Sites/Discovery.svg'
     },
     {
       title: 'Diseño',
       description: 'Creamos un diseño único y atractivo que refleja la identidad de tu marca y conecta con tu audiencia objetivo.',
-      image: '/images/services/design-process.jpg'
+      image: '/images/Sites/design.svg'
     },
     {
       title: 'Desarrollo',
       description: 'Implementamos el diseño con código limpio y optimizado, asegurando un rendimiento excepcional y una experiencia de usuario fluida.',
-      image: '/images/services/development-process.jpg'
+      image: '/images/Sites/Implementacion.svg'
     },
     {
       title: 'Entrega',
       description: 'Realizamos pruebas exhaustivas y optimizaciones finales antes de lanzar tu sitio web al mundo.',
-      image: '/images/services/delivery-process.jpg'
+      image: '/images/Sites/Optimizacion.svg'
     }
   ];
 
