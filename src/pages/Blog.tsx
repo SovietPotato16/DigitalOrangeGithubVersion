@@ -83,6 +83,15 @@ const Blog = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Nuestro Blog
           </h1>
+          
+          {/* Development Banner */}
+          <div className="mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-yellow-400 text-sm font-medium">
+              <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+              Sección en desarrollo
+            </div>
+          </div>
+          
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Explora artículos sobre diseño web, desarrollo, y las últimas tendencias digitales
           </p>
