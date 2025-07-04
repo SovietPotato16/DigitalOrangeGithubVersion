@@ -17,6 +17,7 @@ import Ecommerce from '@/pages/services/Ecommerce';
 import EnterpriseSystems from '@/pages/services/EnterpriseSystems';
 import OrangeDr from '@/pages/services/OrangeDr';
 import OrangeLic from '@/pages/services/OrangeLic';
+import SistemaCaninos from '@/pages/SistemaCaninos';
 import AuthorPage from '@/pages/AuthorPage';
 import './App.css';
 
@@ -40,6 +41,7 @@ function App() {
           <Route path="/services/enterprise-systems" element={<EnterpriseSystems />} />
           <Route path="/services/orange-dr" element={<OrangeDr />} />
           <Route path="/services/orange-lic" element={<OrangeLic />} />
+          <Route path="/sistema-caninos-argentina" element={<SistemaCaninos />} />
         </Routes>
       </main>
       <Footer />

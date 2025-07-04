@@ -157,7 +157,7 @@ const Home = () => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24 md:pt-32">
           {/* Badge */}
           <div className="inline-block transition-transform hover:scale-105 mb-8">
-            <Badge className="bg-gradient-to-r from-orange-500/20 to-pink-500/20 text-orange-300 hover:from-orange-500/30 hover:to-pink-500/30 rounded-full px-6 py-3 text-lg border border-orange-500/30 backdrop-blur-sm">
+            <Badge className="bg-gradient-to-r from-orange-500/20 to-pink-500/20 text-white hover:from-orange-500/30 hover:to-pink-500/30 rounded-full px-6 py-3 text-lg border border-orange-500/30 backdrop-blur-sm">
               <Zap className="w-5 h-5 mr-2" />
               Entregas desde 48 hrs ⚡
             </Badge>
@@ -201,7 +201,7 @@ const Home = () => {
             >
               <Link to="/portfolio">
                 <Eye className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform" />
-                Ver la magia
+                Ver portafolio
               </Link>
             </Button>
           </div>

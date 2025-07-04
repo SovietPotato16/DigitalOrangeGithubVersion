@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
-import { Globe, Store, Building2, Stethoscope, Scale, HeartPulse, Menu } from 'lucide-react';
+import { Globe, Store, Building2, Stethoscope, Scale, HeartPulse, Menu, GraduationCap } from 'lucide-react';
 import { ExternalLink, Github, ArrowRight, Calendar, Users, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -18,49 +18,24 @@ interface Project {
   technologies: string[];
   icon: React.ElementType;
   link?: string;
+  status?: 'development' | 'testing';
 }
 
 const Portfolio: React.FC = () => {
   // State for active category
   const [activeCategory, setActiveCategory] = useState<string>('Todos');
 
-  // Sample projects data
+  // Sample projects data - Finalizados primero (sin banner), luego en desarrollo/pruebas
   const projects: Project[] = [
-    {
-      id: 1,
-      title: "E-commerce Moderno",
-      description: "Tienda online con sistema de pagos y gestión de inventario",
-      category: "E-commerce",
-      image: "https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      icon: Store
-    },
-    {
-      id: 2,
-      title: "Portal Corporativo",
-      description: "Sitio web corporativo con blog y área de clientes",
-      category: "Sitios Web",
-      image: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg",
-      technologies: ["Next.js", "Tailwind CSS", "Sanity CMS"],
-      icon: Globe
-    },
-    {
-      id: 3,
-      title: "Sistema de Gestión Médica",
-      description: "Plataforma para gestión de citas y expedientes médicos",
-      category: "Consultorios Médicos",
-      image: "https://images.pexels.com/photos/3845810/pexels-photo-3845810.jpeg",
-      technologies: ["React", "Firebase", "Material UI"],
-      icon: Stethoscope
-    },
     {
       id: 4,
       title: "ERP Empresarial",
-      description: "Sistema integral de gestión empresarial",
+      description: "Sistema ERP CRM para empresa de productos para mascota en Argentina",
       category: "Sistemas Empresariales",
       image: "https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg",
       technologies: ["Vue.js", "Laravel", "PostgreSQL"],
-      icon: Building2
+      icon: Building2,
+      link: "/sistema-caninos-argentina"
     },
     {
       id: 5,
@@ -69,16 +44,8 @@ const Portfolio: React.FC = () => {
       category: "Despachos Jurídicos",
       image: "https://images.pexels.com/photos/5668862/pexels-photo-5668862.jpeg",
       technologies: ["React", "Django", "PostgreSQL"],
-      icon: Scale
-    },
-    {
-      id: 6,
-      title: "Clínica Dental Digital",
-      description: "Sistema de gestión para clínicas dentales",
-      category: "Clínicas Dentales",
-      image: "https://images.pexels.com/photos/3845811/pexels-photo-3845811.jpeg",
-      technologies: ["React", "Node.js", "MongoDB"],
-      icon: HeartPulse
+      icon: Scale,
+      link: "https://orangepro.app"
     },
     {
       id: 7,
@@ -89,6 +56,56 @@ const Portfolio: React.FC = () => {
       technologies: ["React", "Vite", "Tailwind CSS", "PWA"],
       icon: Menu,
       link: "https://elchipil.digitalorange.com.mx"
+    },
+    {
+      id: 2,
+      title: "Portal Corporativo",
+      description: "Sitio web corporativo con blog y área de clientes",
+      category: "Sitios Web",
+      image: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg",
+      technologies: ["Next.js", "Tailwind CSS", "Sanity CMS"],
+      icon: Globe,
+      status: 'testing'
+    },
+    {
+      id: 3,
+      title: "Sistema de Gestión Médica",
+      description: "Plataforma para gestión de citas y expedientes médicos",
+      category: "Consultorios Médicos",
+      image: "https://images.pexels.com/photos/3845810/pexels-photo-3845810.jpeg",
+      technologies: ["React", "Firebase", "Material UI"],
+      icon: Stethoscope,
+      status: 'testing'
+    },
+    {
+      id: 8,
+      title: "Sistema para Estudiantes",
+      description: "Plataforma educativa para gestión de estudiantes y recursos académicos",
+      category: "Sistemas Educativos",
+      image: "https://images.pexels.com/photos/5427674/pexels-photo-5427674.jpeg",
+      technologies: ["React", "Firebase", "Tailwind CSS", "Node.js"],
+      icon: GraduationCap,
+      status: 'testing'
+    },
+    {
+      id: 1,
+      title: "E-commerce Moderno",
+      description: "Tienda online con sistema de pagos y gestión de inventario",
+      category: "E-commerce",
+      image: "https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg",
+      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+      icon: Store,
+      status: 'development'
+    },
+    {
+      id: 6,
+      title: "Clínica Dental Digital",
+      description: "Sistema de gestión para clínicas dentales",
+      category: "Clínicas Dentales",
+      image: "https://images.pexels.com/photos/3845811/pexels-photo-3845811.jpeg",
+      technologies: ["React", "Node.js", "MongoDB"],
+      icon: HeartPulse,
+      status: 'development'
     }
   ];
 
@@ -103,7 +120,7 @@ const Portfolio: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-900">
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
+      <section className="relative pt-32 pb-12 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
             animate={{
@@ -155,7 +172,7 @@ const Portfolio: React.FC = () => {
       </section>
 
       {/* Category Tabs */}
-      <section className="pt-4 pb-12 bg-gray-900/50 backdrop-blur-lg">
+      <section className="pt-4 pb-8 bg-gray-900/50 backdrop-blur-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-4">
             {categories.map((category) => (
@@ -178,7 +195,7 @@ const Portfolio: React.FC = () => {
       </section>
 
       {/* Projects Grid */}
-      <section className="py-20 bg-gray-900">
+      <section className="py-12 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             layout
@@ -202,6 +219,20 @@ const Portfolio: React.FC = () => {
                       className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+                    {/* Banner diagonal para proyectos en desarrollo */}
+                    {project.status === 'development' && (
+                      <div className="absolute top-3 right-0 bg-red-500 text-white px-6 py-1 rotate-45 transform origin-center text-xs font-bold shadow-lg z-10" style={{transform: 'rotate(45deg) translate(25%, -50%)'}}>
+                        EN DESARROLLO
+                      </div>
+                    )}
+                    
+                    {/* Banner diagonal para proyectos en fase de pruebas */}
+                    {project.status === 'testing' && (
+                      <div className="absolute top-8 -right-6 bg-blue-500 text-white px-8 py-1 rotate-45 transform text-xs font-bold shadow-lg z-10">
+                        EN PRUEBAS
+                      </div>
+                    )}
                   </div>
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-3">
@@ -213,15 +244,27 @@ const Portfolio: React.FC = () => {
                     <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
                     <p className="text-gray-400 mb-4">{project.description}</p>
                     {project.link && (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-orange-400 hover:underline mb-2"
-                      >
-                        Ver sitio
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
+                      <>
+                        {project.link.startsWith('http') ? (
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-orange-400 hover:underline mb-2"
+                          >
+                            Ver sitio
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
+                        ) : (
+                          <Link
+                            to={project.link}
+                            className="inline-flex items-center gap-2 text-orange-400 hover:underline mb-2"
+                          >
+                            Ver proyecto
+                            <ArrowRight className="w-4 h-4" />
+                          </Link>
+                        )}
+                      </>
                     )}
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech) => (

@@ -657,6 +657,15 @@ const Pricing = () => {
             </svg>
           </button>
         </div>
+
+        {/* Pricing Note - Full Width */}
+        <div className="mt-16 mb-16">
+          <div className="w-full p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+            <p className="text-gray-400 text-center text-sm leading-relaxed">
+              <span className="text-orange-400 font-medium">Información importante:</span> Los precios mostrados son aproximados y no incluyen costos de configuración inicial. El precio final puede variar según los requisitos específicos y necesidades particulares de cada cliente.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Modal de contacto */}
