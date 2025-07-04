@@ -1,7 +1,22 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { useEffect } from 'react';
 
 const Footer = () => {
+  // Load Iubenda script safely
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.iubenda.com/iubenda.js';
+    script.async = true;
+    document.head.appendChild(script);
+    
+    return () => {
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    };
+  }, []);
+
   return (
     <footer className="bg-gray-900 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -84,7 +99,6 @@ const Footer = () => {
             <a href="https://www.iubenda.com/privacy-policy/12418386/cookie-policy" className="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe" title="Política de Cookies" target="_blank" rel="noopener noreferrer">Política de Cookies</a>
             <a href="https://www.iubenda.com/condiciones-de-uso/12418386" className="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe" title="Términos y Condiciones" target="_blank" rel="noopener noreferrer">Términos y Condiciones</a>
           </div>
-          <script type="text/javascript" dangerouslySetInnerHTML={{__html:`(function (w,d) {var loader = function () {var s = d.createElement('script'), tag = d.getElementsByTagName('script')[0]; s.src='https://cdn.iubenda.com/iubenda.js'; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener('load', loader, false);}else if(w.attachEvent){w.attachEvent('onload', loader);}else{w.onload = loader;}})(window, document);`}} />
         </div>
       </div>
     </footer>

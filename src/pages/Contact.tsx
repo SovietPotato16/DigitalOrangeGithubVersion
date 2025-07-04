@@ -11,6 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import { submitContactForm } from '@/services/emailService';
 import { toast } from 'react-hot-toast';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import { logger } from '@/utils/logger';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -119,7 +120,7 @@ const Contact = () => {
       }
       
     } catch (error) {
-      console.error('Error submitting contact form:', error);
+      logger.error('Error submitting contact form:', error);
       toast.error(
         'Error inesperado. Por favor intenta nuevamente.',
         { 

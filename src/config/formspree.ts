@@ -64,11 +64,13 @@ export const FALLBACK_EMAIL = {
   }
 };
 
+import { logger } from '@/utils/logger';
+
 // Validation helper
 export const validateFormspreeConfig = () => {
   if (FORMSPREE_CONFIG.PROJECT_WIZARD_FORM_ID === 'YOUR_FORM_ID' || 
       FORMSPREE_CONFIG.CONTACT_FORM_ID === 'YOUR_FORM_ID') {
-    console.warn('⚠️ Formspree not configured! Please update form IDs in src/config/formspree.ts');
+    logger.warn('⚠️ Formspree not configured! Please update form IDs in src/config/formspree.ts');
     return false;
   }
   return true;

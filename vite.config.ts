@@ -84,7 +84,7 @@ export default defineConfig({
     },
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: true,
+    sourcemap: process.env.NODE_ENV === 'development',
     minify: 'terser',
     target: 'es2020',
     terserOptions: {

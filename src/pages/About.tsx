@@ -2,15 +2,16 @@ import { motion } from 'framer-motion';
 import { Users, Award, Clock, Target, Heart, Zap } from 'lucide-react';
 import { useState, lazy, Suspense, useEffect } from 'react';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import { logger } from '@/utils/logger';
 
 const ProjectWizard = lazy(() => import('@/components/ProjectWizard'));
 
 const About = () => {
-  console.log('About component rendered');
+  logger.log('About component rendered');
   const [isWizardOpen, setIsWizardOpen] = useState(false);
 
   useEffect(() => {
-    console.log('Wizard state changed:', isWizardOpen);
+    logger.log('Wizard state changed:', isWizardOpen);
   }, [isWizardOpen]);
 
   const values = [

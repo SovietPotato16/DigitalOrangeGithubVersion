@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Calendar, Clock } from 'lucide-react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { logger } from '@/utils/logger';
 
 interface BlogCardProps {
   slug: string;
@@ -32,7 +33,7 @@ const BlogCard = ({
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/\s+/g, '-');
 
-  console.log('Rendering BlogCard:', { slug, title }); // Debug log
+  logger.log('Rendering BlogCard:', { slug, title }); // Debug log
 
   return (
     <article className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-orange-500/50 transition-all group">

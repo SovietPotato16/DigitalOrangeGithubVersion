@@ -1,5 +1,6 @@
 // Email service for handling form submissions
 import { FORMSPREE_CONFIG, FALLBACK_EMAIL, validateFormspreeConfig } from '@/config/formspree';
+import { logger } from '@/utils/logger';
 
 interface EmailData {
   to: string;
@@ -41,12 +42,12 @@ const EMAIL_CONFIG = {
 const sendEmail = async (emailData: EmailData): Promise<boolean> => {
   // Check if Formspree is properly configured
   if (!validateFormspreeConfig()) {
-    console.warn('⚠️ Formspree not configured. Using fallback method...');
+    logger.warn('⚠️ Formspree not configured. Using fallback method...');
     return sendEmailFallback(emailData);
   }
 
   try {
-    console.log('🚀 Sending email via Formspree...', {
+    logger.log('🚀 Sending email via Formspree...', {
       endpoint: FORMSPREE_CONFIG.PROJECT_WIZARD_ENDPOINT,
       subject: emailData.subject,
       from: emailData.from
@@ -72,23 +73,23 @@ const sendEmail = async (emailData: EmailData): Promise<boolean> => {
       }),
     });
 
-    console.log('📡 Formspree response status:', response.status);
-    console.log('📋 Response headers:', Object.fromEntries(response.headers.entries()));
+    logger.log('📡 Formspree response status:', response.status);
+    logger.log('📋 Response headers:', Object.fromEntries(response.headers.entries()));
 
     if (!response.ok) {
-      console.error('❌ Formspree request failed:', response.status, response.statusText);
+      logger.error('❌ Formspree request failed:', response.status, response.statusText);
       const errorText = await response.text();
-      console.error('📄 Error details:', errorText);
-      console.warn('🔄 Using fallback method...');
+      logger.error('📄 Error details:', errorText);
+      logger.warn('🔄 Using fallback method...');
       return sendEmailFallback(emailData);
     }
 
     const result = await response.json();
-    console.log('✅ Formspree response:', result);
+    logger.log('✅ Formspree response:', result);
     return result.ok || response.status === 200;
   } catch (error) {
-    console.error('Error sending email via Formspree:', error);
-    console.warn('Using fallback method...');
+    logger.error('Error sending email via Formspree:', error);
+    logger.warn('Using fallback method...');
     return sendEmailFallback(emailData);
   }
 };
@@ -104,7 +105,7 @@ const sendEmailFallback = (emailData: EmailData): boolean => {
     
     return true;
   } catch (error) {
-    console.error('Error with fallback email method:', error);
+    logger.error('Error with fallback email method:', error);
     return false;
   }
 };
@@ -240,13 +241,13 @@ export const submitContactForm = async (formData: ContactFormData): Promise<bool
 
   // Validar que tenemos los campos mínimos requeridos (después de completar)
   if (!completeFormData.name || !completeFormData.email || !completeFormData.phone || !completeFormData.service || !completeFormData.message) {
-    console.error('❌ Campos requeridos faltantes en formulario de contacto');
+    logger.error('❌ Campos requeridos faltantes en formulario de contacto');
     return false;
   }
 
   // Check if Formspree is properly configured
   if (!validateFormspreeConfig()) {
-    console.warn('⚠️ Formspree not configured. Using fallback method...');
+    logger.warn('⚠️ Formspree not configured. Using fallback method...');
     const emailData: EmailData = {
       to: EMAIL_CONFIG.recipientEmail,
       from: formData.email,
@@ -257,7 +258,7 @@ export const submitContactForm = async (formData: ContactFormData): Promise<bool
   }
 
   try {
-    console.log('🚀 Sending contact form via Formspree...', {
+    logger.log('🚀 Sending contact form via Formspree...', {
       endpoint: FORMSPREE_CONFIG.CONTACT_FORM_ENDPOINT,
       name: formData.name,
       service: formData.service
@@ -296,13 +297,13 @@ export const submitContactForm = async (formData: ContactFormData): Promise<bool
       })()
     });
 
-    console.log('📡 Formspree response status:', response.status);
+    logger.log('📡 Formspree response status:', response.status);
 
     if (!response.ok) {
-      console.error('❌ Formspree request failed:', response.status, response.statusText);
+      logger.error('❌ Formspree request failed:', response.status, response.statusText);
       const errorText = await response.text();
-      console.error('📄 Error details:', errorText);
-      console.warn('🔄 Using fallback method...');
+      logger.error('📄 Error details:', errorText);
+      logger.warn('🔄 Using fallback method...');
       
       const emailData: EmailData = {
         to: EMAIL_CONFIG.recipientEmail,
@@ -314,12 +315,12 @@ export const submitContactForm = async (formData: ContactFormData): Promise<bool
     }
 
     const result = await response.json();
-    console.log('✅ Contact form response:', result);
+    logger.log('✅ Contact form response:', result);
     return result.ok || response.status === 200;
     
   } catch (error) {
-    console.error('Error sending contact form via Formspree:', error);
-    console.warn('Using fallback method...');
+    logger.error('Error sending contact form via Formspree:', error);
+    logger.warn('Using fallback method...');
     
     const emailData: EmailData = {
       to: EMAIL_CONFIG.recipientEmail,

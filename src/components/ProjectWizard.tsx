@@ -12,6 +12,7 @@ import ProjectFeatures from './ProjectFeatures';
 import ProjectTimeline from './ProjectTimeline';
 import { submitProjectWizardForm } from '@/services/emailService';
 import { toast } from 'react-hot-toast';
+import { logger } from '@/utils/logger';
 
 type ProjectType = 'website' | 'website_ecommerce' | 'medical' | 'legal' | 'dental' | 'enterprise';
 type ProjectScale = 'small' | 'medium' | 'corporate' | 'startup';
@@ -199,7 +200,7 @@ const ProjectWizard = ({ isOpen, onClose }: ProjectWizardProps) => {
       }
       
     } catch (error) {
-      console.error('Error submitting project wizard form:', error);
+      logger.error('Error submitting project wizard form:', error);
       toast.error(
         'Error inesperado. Por favor intenta nuevamente.',
         { 
