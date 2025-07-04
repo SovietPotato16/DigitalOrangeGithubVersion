@@ -1,13 +1,59 @@
-# Allow all crawlers
-User-agent: *
+# Allow only legitimate search engine crawlers
+User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 1
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 1
+
+# Block all other crawlers and scrapers
+User-agent: *
+Disallow: /
+
+# Block common scraping tools
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: ZoominfoBot
+Disallow: /
+
+User-agent: Screaming Frog SEO Spider
+Disallow: /
 
 # Sitemap location
 Sitemap: https://orangedigital.sites/sitemap.xml
 
-# Crawl-delay to prevent server overload
-Crawl-delay: 10
-
-# Attribution requirement
-# Please include attribution when using our content:
-# "Content from Orange Digital Sites (https://orangedigital.sites)" 
+# Additional security headers (for reference)
+# X-Robots-Tag: noindex, nofollow (for specific pages if needed) 
